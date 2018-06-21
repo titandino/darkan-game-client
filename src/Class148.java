@@ -588,7 +588,7 @@ public class Class148 {
 		class527.intStack[(class527.anInt7012 += 141891001) * 1942118537 - 1] = client.anInt7190 * -1474737961;
 	}
 
-	static Class method2553(String string, short i) throws ClassNotFoundException {
+	static Class getClassType(String string, short i) throws ClassNotFoundException {
 		if (string.equals("B"))
 			return Byte.TYPE;
 		if (string.equals("I"))

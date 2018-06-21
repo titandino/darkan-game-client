@@ -192,86 +192,86 @@ public abstract class JS5StandardRequester {
 		Class347.aClass317_4053 = class317;
 	}
 
-	public static void method5560(RsByteBuffer class282_sub35, int i, int i_5_) {
-		Class282_Sub42 class282_sub42 = new Class282_Sub42();
-		((Class282_Sub42) class282_sub42).anInt8033 = class282_sub35.readUnsignedByte() * 1029882891;
-		((Class282_Sub42) class282_sub42).anInt8038 = class282_sub35.readInt() * 1339438983;
-		((Class282_Sub42) class282_sub42).anIntArray8035 = (new int[((Class282_Sub42) class282_sub42).anInt8033 * -286349405]);
-		((Class282_Sub42) class282_sub42).anIntArray8036 = (new int[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aFieldArray8037 = (new Field[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).anIntArray8040 = (new int[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aMethodArray8034 = (new Method[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041 = (new byte[((Class282_Sub42) class282_sub42).anInt8033 * -286349405][][]);
-		for (int i_6_ = 0; i_6_ < ((Class282_Sub42) class282_sub42).anInt8033 * -286349405; i_6_++) {
+	public static void method5560(RsByteBuffer stream) {
+		ReflectionCheck check = new ReflectionCheck();
+		check.numChecks = stream.readUnsignedByte() * 1029882891;
+		check.id = stream.readInt() * 1339438983;
+		check.types = (new int[check.numChecks * -286349405]);
+		check.returnCodes = (new int[-286349405 * check.numChecks]);
+		check.fields = (new Field[-286349405 * check.numChecks]);
+		check.values = (new int[-286349405 * check.numChecks]);
+		check.methods = (new Method[-286349405 * check.numChecks]);
+		check.aByteArrayArrayArray8041 = (new byte[check.numChecks * -286349405][][]);
+		for (int i = 0; i < check.numChecks * -286349405; i++) {
 			try {
-				int i_7_ = class282_sub35.readUnsignedByte();
-				if (i_7_ == 0 || 1 == i_7_ || i_7_ == 2) {
-					String string = class282_sub35.readString();
-					String string_8_ = class282_sub35.readString();
-					int i_9_ = 0;
-					if (1 == i_7_)
-						i_9_ = class282_sub35.readInt();
-					((Class282_Sub42) class282_sub42).anIntArray8035[i_6_] = i_7_;
-					((Class282_Sub42) class282_sub42).anIntArray8040[i_6_] = i_9_;
-					if (Class148.method2553(string, (short) 15152).getClassLoader() == null)
+				int type = stream.readUnsignedByte();
+				if (type == 0 || 1 == type || type == 2) {
+					String className = stream.readString();
+					String fieldName = stream.readString();
+					int value = 0;
+					if (1 == type)
+						value = stream.readInt();
+					check.types[i] = type;
+					check.values[i] = value;
+					if (Class148.getClassType(className, (short) 15152).getClassLoader() == null)
 						throw new SecurityException();
-					((Class282_Sub42) class282_sub42).aFieldArray8037[i_6_] = Class148.method2553(string, (short) 8812).getDeclaredField(string_8_);
-				} else if (3 == i_7_ || 4 == i_7_) {
-					String string = class282_sub35.readString();
-					String string_10_ = class282_sub35.readString();
-					int i_11_ = class282_sub35.readUnsignedByte();
-					String[] strings = new String[i_11_];
-					for (int i_12_ = 0; i_12_ < i_11_; i_12_++)
-						strings[i_12_] = class282_sub35.readString();
-					String string_13_ = class282_sub35.readString();
-					byte[][] is = new byte[i_11_][];
-					if (3 == i_7_) {
-						for (int i_14_ = 0; i_14_ < i_11_; i_14_++) {
-							int i_15_ = class282_sub35.readInt();
+					check.fields[i] = Class148.getClassType(className, (short) 8812).getDeclaredField(fieldName);
+				} else if (3 == type || 4 == type) {
+					String className = stream.readString();
+					String methodName = stream.readString();
+					int paramCount = stream.readUnsignedByte();
+					String[] params = new String[paramCount];
+					for (int paramIdx = 0; paramIdx < paramCount; paramIdx++)
+						params[paramIdx] = stream.readString();
+					String returnType = stream.readString();
+					byte[][] is = new byte[paramCount][];
+					if (3 == type) {
+						for (int i_14_ = 0; i_14_ < paramCount; i_14_++) {
+							int i_15_ = stream.readInt();
 							is[i_14_] = new byte[i_15_];
-							class282_sub35.readBytes(is[i_14_], 0, i_15_, 1724620794);
+							stream.readBytes(is[i_14_], 0, i_15_, 1724620794);
 						}
 					}
-					((Class282_Sub42) class282_sub42).anIntArray8035[i_6_] = i_7_;
-					Class[] var_classes = new Class[i_11_];
-					for (int i_16_ = 0; i_16_ < i_11_; i_16_++)
-						var_classes[i_16_] = Class148.method2553(strings[i_16_], (short) 32325);
-					Class var_class = Class148.method2553(string_13_, (short) 26273);
-					if (Class148.method2553(string, (short) 12990).getClassLoader() == null)
+					check.types[i] = type;
+					Class[] paramClasses = new Class[paramCount];
+					for (int i_16_ = 0; i_16_ < paramCount; i_16_++)
+						paramClasses[i_16_] = Class148.getClassType(params[i_16_], (short) 32325);
+					Class returnTypeClass = Class148.getClassType(returnType, (short) 26273);
+					if (Class148.getClassType(className, (short) 12990).getClassLoader() == null)
 						throw new SecurityException();
-					Method[] methods = Class148.method2553(string, (short) 12676).getDeclaredMethods();
+					Method[] methods = Class148.getClassType(className, (short) 12676).getDeclaredMethods();
 					Method[] methods_17_ = methods;
 					for (int i_18_ = 0; i_18_ < methods_17_.length; i_18_++) {
 						Method method = methods_17_[i_18_];
-						if (method.getName().equals(string_10_)) {
-							Class[] var_classes_19_ = method.getParameterTypes();
-							if (var_classes.length == var_classes_19_.length) {
+						if (method.getName().equals(methodName)) {
+							Class[] paramTypes = method.getParameterTypes();
+							if (paramClasses.length == paramTypes.length) {
 								boolean bool = true;
-								for (int i_20_ = 0; i_20_ < var_classes.length; i_20_++) {
-									if (var_classes[i_20_] != var_classes_19_[i_20_]) {
+								for (int i_20_ = 0; i_20_ < paramClasses.length; i_20_++) {
+									if (paramClasses[i_20_] != paramTypes[i_20_]) {
 										bool = false;
 										break;
 									}
 								}
-								if (bool && var_class == method.getReturnType())
-									((Class282_Sub42) class282_sub42).aMethodArray8034[i_6_] = method;
+								if (bool && returnTypeClass == method.getReturnType())
+									check.methods[i] = method;
 							}
 						}
 					}
-					((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041[i_6_] = is;
+					check.aByteArrayArrayArray8041[i] = is;
 				}
 			} catch (ClassNotFoundException classnotfoundexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -1;
+				check.returnCodes[i] = -1;
 			} catch (SecurityException securityexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -2;
+				check.returnCodes[i] = -2;
 			} catch (NullPointerException nullpointerexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -3;
+				check.returnCodes[i] = -3;
 			} catch (Exception exception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -4;
+				check.returnCodes[i] = -4;
 			} catch (Throwable throwable) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -5;
+				check.returnCodes[i] = -5;
 			}
 		}
-		Class435.aClass482_5332.append(class282_sub42, 1226152090);
+		Class435.aClass482_5332.append(check, 1226152090);
 	}
 }

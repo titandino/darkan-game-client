@@ -193,7 +193,7 @@ public class Class451 implements Iterator {
 	}
 
 	public static boolean method7517(byte i) {
-		Class282_Sub42 class282_sub42 = (Class282_Sub42) Class435.aClass482_5332.head((byte) 42);
+		ReflectionCheck class282_sub42 = (ReflectionCheck) Class435.aClass482_5332.head((byte) 42);
 		if (class282_sub42 == null)
 			return false;
 		return true;

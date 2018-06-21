@@ -51,12 +51,12 @@ public class Class86 {
 	}
 
 	public static boolean method1469(int i) {
-		if (i != anInt831 * -436703373 || null == Class282_Sub42.aClass85_8039) {
+		if (i != anInt831 * -436703373 || null == ReflectionCheck.aClass85_8039) {
 			Class79.method1390(-617797612);
-			Class282_Sub42.aClass85_8039 = Class85.aClass85_815;
+			ReflectionCheck.aClass85_8039 = Class85.aClass85_815;
 			anInt831 = i * 1539001787;
 		}
-		if (Class282_Sub42.aClass85_8039 == Class85.aClass85_815) {
+		if (ReflectionCheck.aClass85_8039 == Class85.aClass85_815) {
 			byte[] is = IndexLoaders.CUTSCENE_INDEX.getFile(i, -1513841891);
 			if (null == is)
 				return false;
@@ -85,9 +85,9 @@ public class Class86 {
 			aClass96Array822 = new Class96[i_10_];
 			for (int i_11_ = 0; i_11_ < i_10_; i_11_++)
 				aClass96Array822[i_11_] = Class16.method562(class282_sub35, 1972468902);
-			Class282_Sub42.aClass85_8039 = Class85.aClass85_816;
+			ReflectionCheck.aClass85_8039 = Class85.aClass85_816;
 		}
-		if (Class85.aClass85_816 == Class282_Sub42.aClass85_8039) {
+		if (Class85.aClass85_816 == ReflectionCheck.aClass85_8039) {
 			boolean bool = true;
 			Class75[] class75s = Class82.aClass75Array804;
 			for (int i_12_ = 0; i_12_ < class75s.length; i_12_++) {
@@ -109,7 +109,7 @@ public class Class86 {
 			}
 			if (!bool)
 				return false;
-			Class282_Sub42.aClass85_8039 = Class85.aClass85_814;
+			ReflectionCheck.aClass85_8039 = Class85.aClass85_814;
 		}
 		return true;
 	}
@@ -153,7 +153,7 @@ public class Class86 {
 		anInt819 = 523556513;
 		anInt825 = 0;
 		anInt824 = 0;
-		Class282_Sub42.aClass85_8039 = null;
+		ReflectionCheck.aClass85_8039 = null;
 		anInt831 = -1539001787;
 		if (aBool826) {
 			client.aShort7214 = aShort828;

@@ -244,7 +244,7 @@ public class Class282_Sub20_Sub22 extends Class282_Sub20 {
 					TCPMessage class282_sub23 = Class271.method4828(OutgoingPacket.aClass379_4563, (client.aClass184_7475.isaac), 780391787);
 					class282_sub23.buffer.writeByte(0);
 					int i_34_ = (class282_sub23.buffer.index * -1990677291);
-					Class8_Sub2.method14264((class282_sub23.buffer), 1655549985);
+					Class8_Sub2.method14264((class282_sub23.buffer));
 					class282_sub23.buffer.method13061((class282_sub23.buffer.index * -1990677291) - i_34_, 788141162);
 					client.aClass184_7475.method3049(class282_sub23, -467156881);
 				}

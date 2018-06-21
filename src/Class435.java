@@ -38,34 +38,34 @@ public class Class435 {
 	}
 
 	public static void method7294(RsBitsBuffer class282_sub35_sub2) {
-		Class282_Sub42 class282_sub42 = (Class282_Sub42) aClass482_5332.head((byte) 27);
+		ReflectionCheck class282_sub42 = (ReflectionCheck) aClass482_5332.head((byte) 27);
 		if (class282_sub42 != null) {
 			int i = class282_sub35_sub2.index * -1990677291;
-			class282_sub35_sub2.writeInt(1935007287 * (((Class282_Sub42) class282_sub42).anInt8038));
-			for (int i_0_ = 0; (i_0_ < -286349405 * ((Class282_Sub42) class282_sub42).anInt8033); i_0_++) {
-				if (0 != ((Class282_Sub42) class282_sub42).anIntArray8036[i_0_])
-					class282_sub35_sub2.writeByte((((Class282_Sub42) class282_sub42).anIntArray8036[i_0_]));
+			class282_sub35_sub2.writeInt(1935007287 * (((ReflectionCheck) class282_sub42).id));
+			for (int i_0_ = 0; (i_0_ < -286349405 * ((ReflectionCheck) class282_sub42).numChecks); i_0_++) {
+				if (0 != ((ReflectionCheck) class282_sub42).returnCodes[i_0_])
+					class282_sub35_sub2.writeByte((((ReflectionCheck) class282_sub42).returnCodes[i_0_]));
 				else {
 					try {
-						int i_1_ = (((Class282_Sub42) class282_sub42).anIntArray8035[i_0_]);
+						int i_1_ = (((ReflectionCheck) class282_sub42).types[i_0_]);
 						if (i_1_ == 0) {
-							Field field = (((Class282_Sub42) class282_sub42).aFieldArray8037[i_0_]);
+							Field field = (((ReflectionCheck) class282_sub42).fields[i_0_]);
 							int i_2_ = field.getInt(null);
 							class282_sub35_sub2.writeByte(0);
 							class282_sub35_sub2.writeInt(i_2_);
 						} else if (1 == i_1_) {
-							Field field = (((Class282_Sub42) class282_sub42).aFieldArray8037[i_0_]);
-							field.setInt(null, (((Class282_Sub42) class282_sub42).anIntArray8040[i_0_]));
+							Field field = (((ReflectionCheck) class282_sub42).fields[i_0_]);
+							field.setInt(null, (((ReflectionCheck) class282_sub42).values[i_0_]));
 							class282_sub35_sub2.writeByte(0);
 						} else if (2 == i_1_) {
-							Field field = (((Class282_Sub42) class282_sub42).aFieldArray8037[i_0_]);
+							Field field = (((ReflectionCheck) class282_sub42).fields[i_0_]);
 							int i_3_ = field.getModifiers();
 							class282_sub35_sub2.writeByte(0);
 							class282_sub35_sub2.writeInt(i_3_);
 						}
 						if (i_1_ == 3) {
-							Method method = (((Class282_Sub42) class282_sub42).aMethodArray8034[i_0_]);
-							byte[][] is = (((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041[i_0_]);
+							Method method = (((ReflectionCheck) class282_sub42).methods[i_0_]);
+							byte[][] is = (((ReflectionCheck) class282_sub42).aByteArrayArrayArray8041[i_0_]);
 							Object[] objects = new Object[is.length];
 							for (int i_4_ = 0; i_4_ < is.length; i_4_++) {
 								ObjectInputStream objectinputstream = (new ObjectInputStream(new ByteArrayInputStream(is[i_4_])));
@@ -83,7 +83,7 @@ public class Class435 {
 							} else
 								class282_sub35_sub2.writeByte(4);
 						} else if (i_1_ == 4) {
-							Method method = (((Class282_Sub42) class282_sub42).aMethodArray8034[i_0_]);
+							Method method = (((ReflectionCheck) class282_sub42).methods[i_0_]);
 							int i_5_ = method.getModifiers();
 							class282_sub35_sub2.writeByte(0);
 							class282_sub35_sub2.writeInt(i_5_);
@@ -133,16 +133,16 @@ public class Class435 {
 	}
 
 	public static void method7297(RsByteBuffer class282_sub35, int i) {
-		Class282_Sub42 class282_sub42 = new Class282_Sub42();
-		((Class282_Sub42) class282_sub42).anInt8033 = class282_sub35.readUnsignedByte() * 1029882891;
-		((Class282_Sub42) class282_sub42).anInt8038 = class282_sub35.readInt() * 1339438983;
-		((Class282_Sub42) class282_sub42).anIntArray8035 = (new int[((Class282_Sub42) class282_sub42).anInt8033 * -286349405]);
-		((Class282_Sub42) class282_sub42).anIntArray8036 = (new int[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aFieldArray8037 = (new Field[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).anIntArray8040 = (new int[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aMethodArray8034 = (new Method[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041 = (new byte[((Class282_Sub42) class282_sub42).anInt8033 * -286349405][][]);
-		for (int i_6_ = 0; i_6_ < ((Class282_Sub42) class282_sub42).anInt8033 * -286349405; i_6_++) {
+		ReflectionCheck class282_sub42 = new ReflectionCheck();
+		((ReflectionCheck) class282_sub42).numChecks = class282_sub35.readUnsignedByte() * 1029882891;
+		((ReflectionCheck) class282_sub42).id = class282_sub35.readInt() * 1339438983;
+		((ReflectionCheck) class282_sub42).types = (new int[((ReflectionCheck) class282_sub42).numChecks * -286349405]);
+		((ReflectionCheck) class282_sub42).returnCodes = (new int[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).fields = (new Field[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).values = (new int[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).methods = (new Method[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).aByteArrayArrayArray8041 = (new byte[((ReflectionCheck) class282_sub42).numChecks * -286349405][][]);
+		for (int i_6_ = 0; i_6_ < ((ReflectionCheck) class282_sub42).numChecks * -286349405; i_6_++) {
 			try {
 				int i_7_ = class282_sub35.readUnsignedByte();
 				if (i_7_ == 0 || 1 == i_7_ || i_7_ == 2) {
@@ -151,11 +151,11 @@ public class Class435 {
 					int i_9_ = 0;
 					if (1 == i_7_)
 						i_9_ = class282_sub35.readInt();
-					((Class282_Sub42) class282_sub42).anIntArray8035[i_6_] = i_7_;
-					((Class282_Sub42) class282_sub42).anIntArray8040[i_6_] = i_9_;
-					if (Class148.method2553(string, (short) 11600).getClassLoader() == null)
+					((ReflectionCheck) class282_sub42).types[i_6_] = i_7_;
+					((ReflectionCheck) class282_sub42).values[i_6_] = i_9_;
+					if (Class148.getClassType(string, (short) 11600).getClassLoader() == null)
 						throw new SecurityException();
-					((Class282_Sub42) class282_sub42).aFieldArray8037[i_6_] = Class148.method2553(string, (short) 22853).getDeclaredField(string_8_);
+					((ReflectionCheck) class282_sub42).fields[i_6_] = Class148.getClassType(string, (short) 22853).getDeclaredField(string_8_);
 				} else if (3 == i_7_ || 4 == i_7_) {
 					String string = class282_sub35.readString();
 					String string_10_ = class282_sub35.readString();
@@ -172,14 +172,14 @@ public class Class435 {
 							class282_sub35.readBytes(is[i_14_], 0, i_15_, 2066553299);
 						}
 					}
-					((Class282_Sub42) class282_sub42).anIntArray8035[i_6_] = i_7_;
+					((ReflectionCheck) class282_sub42).types[i_6_] = i_7_;
 					Class[] var_classes = new Class[i_11_];
 					for (int i_16_ = 0; i_16_ < i_11_; i_16_++)
-						var_classes[i_16_] = Class148.method2553(strings[i_16_], (short) 29429);
-					Class var_class = Class148.method2553(string_13_, (short) 10269);
-					if (Class148.method2553(string, (short) 8789).getClassLoader() == null)
+						var_classes[i_16_] = Class148.getClassType(strings[i_16_], (short) 29429);
+					Class var_class = Class148.getClassType(string_13_, (short) 10269);
+					if (Class148.getClassType(string, (short) 8789).getClassLoader() == null)
 						throw new SecurityException();
-					Method[] methods = Class148.method2553(string, (short) 24538).getDeclaredMethods();
+					Method[] methods = Class148.getClassType(string, (short) 24538).getDeclaredMethods();
 					Method[] methods_17_ = methods;
 					for (int i_18_ = 0; i_18_ < methods_17_.length; i_18_++) {
 						Method method = methods_17_[i_18_];
@@ -194,38 +194,38 @@ public class Class435 {
 									}
 								}
 								if (bool && var_class == method.getReturnType())
-									((Class282_Sub42) class282_sub42).aMethodArray8034[i_6_] = method;
+									((ReflectionCheck) class282_sub42).methods[i_6_] = method;
 							}
 						}
 					}
-					((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041[i_6_] = is;
+					((ReflectionCheck) class282_sub42).aByteArrayArrayArray8041[i_6_] = is;
 				}
 			} catch (ClassNotFoundException classnotfoundexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -1;
+				((ReflectionCheck) class282_sub42).returnCodes[i_6_] = -1;
 			} catch (SecurityException securityexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -2;
+				((ReflectionCheck) class282_sub42).returnCodes[i_6_] = -2;
 			} catch (NullPointerException nullpointerexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -3;
+				((ReflectionCheck) class282_sub42).returnCodes[i_6_] = -3;
 			} catch (Exception exception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -4;
+				((ReflectionCheck) class282_sub42).returnCodes[i_6_] = -4;
 			} catch (Throwable throwable) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_6_] = -5;
+				((ReflectionCheck) class282_sub42).returnCodes[i_6_] = -5;
 			}
 		}
 		aClass482_5332.append(class282_sub42, -1342758977);
 	}
 
 	public static void method7298(RsByteBuffer class282_sub35, int i) {
-		Class282_Sub42 class282_sub42 = new Class282_Sub42();
-		((Class282_Sub42) class282_sub42).anInt8033 = class282_sub35.readUnsignedByte() * 1029882891;
-		((Class282_Sub42) class282_sub42).anInt8038 = class282_sub35.readInt() * 1339438983;
-		((Class282_Sub42) class282_sub42).anIntArray8035 = (new int[((Class282_Sub42) class282_sub42).anInt8033 * -286349405]);
-		((Class282_Sub42) class282_sub42).anIntArray8036 = (new int[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aFieldArray8037 = (new Field[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).anIntArray8040 = (new int[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aMethodArray8034 = (new Method[-286349405 * ((Class282_Sub42) class282_sub42).anInt8033]);
-		((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041 = (new byte[((Class282_Sub42) class282_sub42).anInt8033 * -286349405][][]);
-		for (int i_21_ = 0; i_21_ < ((Class282_Sub42) class282_sub42).anInt8033 * -286349405; i_21_++) {
+		ReflectionCheck class282_sub42 = new ReflectionCheck();
+		((ReflectionCheck) class282_sub42).numChecks = class282_sub35.readUnsignedByte() * 1029882891;
+		((ReflectionCheck) class282_sub42).id = class282_sub35.readInt() * 1339438983;
+		((ReflectionCheck) class282_sub42).types = (new int[((ReflectionCheck) class282_sub42).numChecks * -286349405]);
+		((ReflectionCheck) class282_sub42).returnCodes = (new int[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).fields = (new Field[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).values = (new int[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).methods = (new Method[-286349405 * ((ReflectionCheck) class282_sub42).numChecks]);
+		((ReflectionCheck) class282_sub42).aByteArrayArrayArray8041 = (new byte[((ReflectionCheck) class282_sub42).numChecks * -286349405][][]);
+		for (int i_21_ = 0; i_21_ < ((ReflectionCheck) class282_sub42).numChecks * -286349405; i_21_++) {
 			try {
 				int i_22_ = class282_sub35.readUnsignedByte();
 				if (i_22_ == 0 || 1 == i_22_ || i_22_ == 2) {
@@ -234,11 +234,11 @@ public class Class435 {
 					int i_24_ = 0;
 					if (1 == i_22_)
 						i_24_ = class282_sub35.readInt();
-					((Class282_Sub42) class282_sub42).anIntArray8035[i_21_] = i_22_;
-					((Class282_Sub42) class282_sub42).anIntArray8040[i_21_] = i_24_;
-					if (Class148.method2553(string, (short) 8359).getClassLoader() == null)
+					((ReflectionCheck) class282_sub42).types[i_21_] = i_22_;
+					((ReflectionCheck) class282_sub42).values[i_21_] = i_24_;
+					if (Class148.getClassType(string, (short) 8359).getClassLoader() == null)
 						throw new SecurityException();
-					((Class282_Sub42) class282_sub42).aFieldArray8037[i_21_] = Class148.method2553(string, (short) 25870).getDeclaredField(string_23_);
+					((ReflectionCheck) class282_sub42).fields[i_21_] = Class148.getClassType(string, (short) 25870).getDeclaredField(string_23_);
 				} else if (3 == i_22_ || 4 == i_22_) {
 					String string = class282_sub35.readString();
 					String string_25_ = class282_sub35.readString();
@@ -255,14 +255,14 @@ public class Class435 {
 							class282_sub35.readBytes(is[i_29_], 0, i_30_, 404199347);
 						}
 					}
-					((Class282_Sub42) class282_sub42).anIntArray8035[i_21_] = i_22_;
+					((ReflectionCheck) class282_sub42).types[i_21_] = i_22_;
 					Class[] var_classes = new Class[i_26_];
 					for (int i_31_ = 0; i_31_ < i_26_; i_31_++)
-						var_classes[i_31_] = Class148.method2553(strings[i_31_], (short) 11211);
-					Class var_class = Class148.method2553(string_28_, (short) 24149);
-					if (Class148.method2553(string, (short) 21540).getClassLoader() == null)
+						var_classes[i_31_] = Class148.getClassType(strings[i_31_], (short) 11211);
+					Class var_class = Class148.getClassType(string_28_, (short) 24149);
+					if (Class148.getClassType(string, (short) 21540).getClassLoader() == null)
 						throw new SecurityException();
-					Method[] methods = Class148.method2553(string, (short) 8495).getDeclaredMethods();
+					Method[] methods = Class148.getClassType(string, (short) 8495).getDeclaredMethods();
 					Method[] methods_32_ = methods;
 					for (int i_33_ = 0; i_33_ < methods_32_.length; i_33_++) {
 						Method method = methods_32_[i_33_];
@@ -277,56 +277,56 @@ public class Class435 {
 									}
 								}
 								if (bool && var_class == method.getReturnType())
-									((Class282_Sub42) class282_sub42).aMethodArray8034[i_21_] = method;
+									((ReflectionCheck) class282_sub42).methods[i_21_] = method;
 							}
 						}
 					}
-					((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041[i_21_] = is;
+					((ReflectionCheck) class282_sub42).aByteArrayArrayArray8041[i_21_] = is;
 				}
 			} catch (ClassNotFoundException classnotfoundexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_21_] = -1;
+				((ReflectionCheck) class282_sub42).returnCodes[i_21_] = -1;
 			} catch (SecurityException securityexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_21_] = -2;
+				((ReflectionCheck) class282_sub42).returnCodes[i_21_] = -2;
 			} catch (NullPointerException nullpointerexception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_21_] = -3;
+				((ReflectionCheck) class282_sub42).returnCodes[i_21_] = -3;
 			} catch (Exception exception) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_21_] = -4;
+				((ReflectionCheck) class282_sub42).returnCodes[i_21_] = -4;
 			} catch (Throwable throwable) {
-				((Class282_Sub42) class282_sub42).anIntArray8036[i_21_] = -5;
+				((ReflectionCheck) class282_sub42).returnCodes[i_21_] = -5;
 			}
 		}
 		aClass482_5332.append(class282_sub42, 1807094121);
 	}
 
 	public static void method7299(RsBitsBuffer class282_sub35_sub2) {
-		Class282_Sub42 class282_sub42 = (Class282_Sub42) aClass482_5332.head((byte) 86);
+		ReflectionCheck class282_sub42 = (ReflectionCheck) aClass482_5332.head((byte) 86);
 		if (class282_sub42 != null) {
 			int i = class282_sub35_sub2.index * -1990677291;
-			class282_sub35_sub2.writeInt(1935007287 * (((Class282_Sub42) class282_sub42).anInt8038));
-			for (int i_36_ = 0; (i_36_ < -286349405 * ((Class282_Sub42) class282_sub42).anInt8033); i_36_++) {
-				if (0 != ((Class282_Sub42) class282_sub42).anIntArray8036[i_36_])
-					class282_sub35_sub2.writeByte((((Class282_Sub42) class282_sub42).anIntArray8036[i_36_]));
+			class282_sub35_sub2.writeInt(1935007287 * (((ReflectionCheck) class282_sub42).id));
+			for (int i_36_ = 0; (i_36_ < -286349405 * ((ReflectionCheck) class282_sub42).numChecks); i_36_++) {
+				if (0 != ((ReflectionCheck) class282_sub42).returnCodes[i_36_])
+					class282_sub35_sub2.writeByte((((ReflectionCheck) class282_sub42).returnCodes[i_36_]));
 				else {
 					try {
-						int i_37_ = (((Class282_Sub42) class282_sub42).anIntArray8035[i_36_]);
+						int i_37_ = (((ReflectionCheck) class282_sub42).types[i_36_]);
 						if (i_37_ == 0) {
-							Field field = (((Class282_Sub42) class282_sub42).aFieldArray8037[i_36_]);
+							Field field = (((ReflectionCheck) class282_sub42).fields[i_36_]);
 							int i_38_ = field.getInt(null);
 							class282_sub35_sub2.writeByte(0);
 							class282_sub35_sub2.writeInt(i_38_);
 						} else if (1 == i_37_) {
-							Field field = (((Class282_Sub42) class282_sub42).aFieldArray8037[i_36_]);
-							field.setInt(null, (((Class282_Sub42) class282_sub42).anIntArray8040[i_36_]));
+							Field field = (((ReflectionCheck) class282_sub42).fields[i_36_]);
+							field.setInt(null, (((ReflectionCheck) class282_sub42).values[i_36_]));
 							class282_sub35_sub2.writeByte(0);
 						} else if (2 == i_37_) {
-							Field field = (((Class282_Sub42) class282_sub42).aFieldArray8037[i_36_]);
+							Field field = (((ReflectionCheck) class282_sub42).fields[i_36_]);
 							int i_39_ = field.getModifiers();
 							class282_sub35_sub2.writeByte(0);
 							class282_sub35_sub2.writeInt(i_39_);
 						}
 						if (i_37_ == 3) {
-							Method method = (((Class282_Sub42) class282_sub42).aMethodArray8034[i_36_]);
-							byte[][] is = (((Class282_Sub42) class282_sub42).aByteArrayArrayArray8041[i_36_]);
+							Method method = (((ReflectionCheck) class282_sub42).methods[i_36_]);
+							byte[][] is = (((ReflectionCheck) class282_sub42).aByteArrayArrayArray8041[i_36_]);
 							Object[] objects = new Object[is.length];
 							for (int i_40_ = 0; i_40_ < is.length; i_40_++) {
 								ObjectInputStream objectinputstream = (new ObjectInputStream(new ByteArrayInputStream(is[i_40_])));
@@ -344,7 +344,7 @@ public class Class435 {
 							} else
 								class282_sub35_sub2.writeByte(4);
 						} else if (i_37_ == 4) {
-							Method method = (((Class282_Sub42) class282_sub42).aMethodArray8034[i_36_]);
+							Method method = (((ReflectionCheck) class282_sub42).methods[i_36_]);
 							int i_41_ = method.getModifiers();
 							class282_sub35_sub2.writeByte(0);
 							class282_sub35_sub2.writeInt(i_41_);

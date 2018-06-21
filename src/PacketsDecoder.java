@@ -1868,7 +1868,7 @@ public class PacketsDecoder extends Class455 {
 			return true;
 		}
 		if (class184.aClass375_2286 == IncomingPacket.aClass375_4449) {
-			JS5StandardRequester.method5560(stream, 715663393 * class184.anInt2287, -822486096);
+			JS5StandardRequester.method5560(stream);
 			class184.aClass375_2286 = null;
 			return true;
 		}

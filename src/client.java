@@ -5243,7 +5243,7 @@ public final class client extends Engine {
 			return true;
 		}
 		if (((Class184) class184).aClass375_2286 == IncomingPacket.aClass375_4449) {
-			JS5StandardRequester.method5560(class282_sub35_sub2, 715663393 * ((Class184) class184).anInt2287, 976631408);
+			JS5StandardRequester.method5560(class282_sub35_sub2);
 			((Class184) class184).aClass375_2286 = null;
 			return true;
 		}
@@ -6506,7 +6506,7 @@ public final class client extends Engine {
 					TCPMessage class282_sub23 = Class271.method4828(OutgoingPacket.aClass379_4563, aClass184_7475.isaac, 1654660566);
 					class282_sub23.buffer.writeByte(0);
 					int i = (class282_sub23.buffer.index * -1990677291);
-					Class8_Sub2.method14264((class282_sub23.buffer), 217845464);
+					Class8_Sub2.method14264((class282_sub23.buffer));
 					class282_sub23.buffer.method13061((class282_sub23.buffer.index * -1990677291) - i, -411171073);
 					aClass184_7475.method3049(class282_sub23, 1733356625);
 				}
@@ -6757,7 +6757,7 @@ public final class client extends Engine {
 					TCPMessage class282_sub23 = Class271.method4828(OutgoingPacket.aClass379_4563, aClass184_7475.isaac, 632560573);
 					class282_sub23.buffer.writeByte(0);
 					int i = (class282_sub23.buffer.index * -1990677291);
-					Class8_Sub2.method14264((class282_sub23.buffer), 1181436384);
+					Class8_Sub2.method14264((class282_sub23.buffer));
 					class282_sub23.buffer.method13061((class282_sub23.buffer.index * -1990677291) - i, -500573916);
 					aClass184_7475.method3049(class282_sub23, -142435156);
 				}
@@ -12151,7 +12151,7 @@ public final class client extends Engine {
 					TCPMessage class282_sub23 = Class271.method4828(OutgoingPacket.aClass379_4563, aClass184_7475.isaac, 530260856);
 					class282_sub23.buffer.writeByte(0);
 					int i = (class282_sub23.buffer.index * -1990677291);
-					Class8_Sub2.method14264((class282_sub23.buffer), 312807441);
+					Class8_Sub2.method14264((class282_sub23.buffer));
 					class282_sub23.buffer.method13061((class282_sub23.buffer.index * -1990677291) - i, -933280413);
 					aClass184_7475.method3049(class282_sub23, 1334017715);
 				}

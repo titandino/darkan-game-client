@@ -270,12 +270,12 @@ public class LoadingStage {
 	}
 
 	public static boolean method6684(int i, byte i_55_) {
-		if (i != Class86.anInt831 * -436703373 || null == Class282_Sub42.aClass85_8039) {
+		if (i != Class86.anInt831 * -436703373 || null == ReflectionCheck.aClass85_8039) {
 			Class79.method1390(769951591);
-			Class282_Sub42.aClass85_8039 = Class85.aClass85_815;
+			ReflectionCheck.aClass85_8039 = Class85.aClass85_815;
 			Class86.anInt831 = i * 1539001787;
 		}
-		if (Class282_Sub42.aClass85_8039 == Class85.aClass85_815) {
+		if (ReflectionCheck.aClass85_8039 == Class85.aClass85_815) {
 			byte[] is = IndexLoaders.CUTSCENE_INDEX.getFile(i, -130725112);
 			if (null == is)
 				return false;
@@ -304,9 +304,9 @@ public class LoadingStage {
 			Class86.aClass96Array822 = new Class96[i_66_];
 			for (int i_67_ = 0; i_67_ < i_66_; i_67_++)
 				Class86.aClass96Array822[i_67_] = Class16.method562(class282_sub35, 1972468902);
-			Class282_Sub42.aClass85_8039 = Class85.aClass85_816;
+			ReflectionCheck.aClass85_8039 = Class85.aClass85_816;
 		}
-		if (Class85.aClass85_816 == Class282_Sub42.aClass85_8039) {
+		if (Class85.aClass85_816 == ReflectionCheck.aClass85_8039) {
 			boolean bool = true;
 			Class75[] class75s = Class82.aClass75Array804;
 			for (int i_68_ = 0; i_68_ < class75s.length; i_68_++) {
@@ -328,7 +328,7 @@ public class LoadingStage {
 			}
 			if (!bool)
 				return false;
-			Class282_Sub42.aClass85_8039 = Class85.aClass85_814;
+			ReflectionCheck.aClass85_8039 = Class85.aClass85_814;
 		}
 		return true;
 	}
