@@ -2,26 +2,26 @@ package com.jagex;
 
 public interface Interface15 {
 
-    long method2();
+	public long method2();
 
-    void method110(byte[] var2, int var3);
+	public void method110(byte[] var2, int var3);
 
-    void method111(byte[] var2, int var3);
+	public void method111(byte[] var2, int var3);
 
-    int method74();
+	public int method74();
 
-    int method1();
+	public int method1();
 
-    long method112();
+	public long method112();
 
-    long method113();
+	public long method113();
 
-    void method114(byte[] var2, int var3);
+	public void method114(byte[] var2, int var3);
 
-    void method107(byte[] var2, int var3);
+	public void method107(byte[] var2, int var3);
 
-    void method108(byte[] var2, int var3);
+	public void method108(byte[] var2, int var3);
 
-    void method115(byte[] var2, int var3);
+	public void method115(byte[] var2, int var3);
 
 }

@@ -1,65 +1,67 @@
 package com.jagex;
 
+import com.jagex.unknown.Class150;
+
 public interface Interface6 extends Interface30 {
 
-    float method45(float var1);
+	public float method45(float var1);
 
-    boolean method46();
+	public boolean method46();
 
-    float method47(float var1);
+	public float method47(float var1);
 
-    void method48(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
+	public void method48(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
 
-    boolean method49();
+	public boolean method49();
 
-    void method50(boolean var1, boolean var2);
+	public void method50(boolean var1, boolean var2);
 
-    float method51(float var1);
+	public float method51(float var1);
 
-    void method52(int var1, int var2, int var3, int var4, byte[] var5, Class150 var6, int var7, int var8);
+	public void method52(int var1, int var2, int var3, int var4, byte[] var5, Class150 var6, int var7, int var8);
 
-    void method53(int var3, int var4, int[] var5);
+	public void method53(int var3, int var4, int[] var5);
 
-    boolean method54();
+	public boolean method54();
 
-    int method55();
+	public int method55();
 
-    float method56(float var1);
+	public float method56(float var1);
 
-    int method57();
+	public int method57();
 
-    float method58(float var1);
+	public float method58(float var1);
 
-    int method1();
+	public int method1();
 
-    int method59();
+	public int method59();
 
-    int method36();
+	public int method36();
 
-    float method60(float var1);
+	public float method60(float var1);
 
-    void method61(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
+	public void method61(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
 
-    float method62(float var1);
+	public float method62(float var1);
 
-    boolean method63();
+	public boolean method63();
 
-    void method64(boolean var1, boolean var2);
+	public void method64(boolean var1, boolean var2);
 
-    float method65(float var1);
+	public float method65(float var1);
 
-    void method66(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
+	public void method66(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
 
-    void method67(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
+	public void method67(int var1, int var2, int var3, int var4, int[] var5, int var6, int var7);
 
-    void method68(int var1, int var2, int var3, int var4, byte[] var5, Class150 var6, int var7, int var8);
+	public void method68(int var1, int var2, int var3, int var4, byte[] var5, Class150 var6, int var7, int var8);
 
-    void method69(int var1, int var2, int var3, int var4, int[] var5, int var6);
+	public void method69(int var1, int var2, int var3, int var4, int[] var5, int var6);
 
-    int method70();
+	public int method70();
 
-    int method71();
+	public int method71();
 
-    int method72();
+	public int method72();
 
 }

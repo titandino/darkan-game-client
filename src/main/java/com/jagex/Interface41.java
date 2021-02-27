@@ -1,19 +1,21 @@
 package com.jagex;
 
+import com.jagex.unknown.Class445;
+
 public interface Interface41 {
 
-    Class445 method230();
+	public Class445 method230();
 
-    int getCompletion();
+	int getCompletion();
 
-    int method231();
+	public int method231();
 
-    Class445 method232();
+	public Class445 method232();
 
-    Class445 method233();
+	public Class445 method233();
 
-    Class445 method234();
+	public Class445 method234();
 
-    Class445 method235();
+	public Class445 method235();
 
 }

@@ -2,34 +2,34 @@ package com.jagex;
 
 public interface Interface2 {
 
-    boolean method9();
+	public boolean method9();
 
-    boolean method10();
+	public boolean method10();
 
-    void method11(boolean var1);
+	public void method11(boolean var1);
 
-    void method12(boolean var1);
+	public void method12(boolean var1);
 
-    boolean method13();
+	public boolean method13();
 
-    void method14(boolean var1);
+	public void method14(boolean var1);
 
-    void method15();
+	public void method15();
 
-    void method16();
+	public void method16();
 
-    boolean method17();
+	public boolean method17();
 
-    void method18();
+	public void method18();
 
-    void method19();
+	public void method19();
 
-    void method20(boolean var1);
+	public void method20(boolean var1);
 
-    boolean method21();
+	public boolean method21();
 
-    void method22();
+	public void method22();
 
-    void method23();
+	public void method23();
 
 }

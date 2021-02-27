@@ -1,20 +1,22 @@
 package com.jagex;
 
+import com.jagex.unknown.Class404;
+
 public interface LibraryLoader {
 
-    boolean hasDxLibrary();
+	public boolean hasDxLibrary();
 
-    boolean unload();
+	public boolean unload();
 
-    boolean loadLibrary(String var1);
+	public boolean loadLibrary(String var1);
 
-    boolean containsLibrary(String var1);
+	public boolean containsLibrary(String var1);
 
-	static LibraryLoader getLoader() {
-	    if (Class404.LIBRARY_LOADER == null) {
-	        throw new IllegalStateException("");
-	    } else {
-	        return Class404.LIBRARY_LOADER;
-	    }
+	public static LibraryLoader getLoader() {
+		if (Class404.LIBRARY_LOADER == null) {
+			throw new IllegalStateException("");
+		} else {
+			return Class404.LIBRARY_LOADER;
+		}
 	}
 }

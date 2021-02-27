@@ -1,0 +1,60 @@
+package com.jagex.unknown;
+
+import com.jagex.PulseEvent;
+
+import java.io.File;
+
+public class OperatingSystemInfo {
+
+	public static String OS_NAME;
+
+	public static String OS_ARCHITECTURE;
+
+	static {
+		String str_0 = "Unknown";
+		try {
+			str_0 = System.getProperty("java.vendor").toLowerCase();
+		} catch (Exception ignored) {
+		}
+		str_0.toLowerCase();
+		str_0 = "Unknown";
+		try {
+			str_0 = System.getProperty("java.version").toLowerCase();
+		} catch (Exception ignored) {
+		}
+		str_0.toLowerCase();
+		str_0 = "Unknown";
+		try {
+			str_0 = System.getProperty("os.name").toLowerCase();
+		} catch (Exception ignored) {
+		}
+		OS_NAME = str_0.toLowerCase();
+		str_0 = "Unknown";
+		try {
+			str_0 = System.getProperty("os.arch").toLowerCase();
+		} catch (Exception ignored) {
+		}
+		OS_ARCHITECTURE = str_0.toLowerCase();
+		str_0 = "Unknown";
+		try {
+			str_0 = System.getProperty("os.version").toLowerCase();
+		} catch (Exception ignored) {
+		}
+		str_0.toLowerCase();
+		str_0 = "~/";
+		try {
+			str_0 = System.getProperty("user.home").toLowerCase();
+		} catch (Exception ignored) {
+		}
+		new File(str_0);
+	}
+
+	OperatingSystemInfo() throws Throwable {
+		throw new Error();
+	}
+
+	public static void method6774(int i_0) {
+		PulseEvent class282_sub50_sub12_2 = PulseEvent.createPulseEvent(11, i_0);
+		class282_sub50_sub12_2.method14965();
+	}
+}

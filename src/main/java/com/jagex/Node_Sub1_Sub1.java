@@ -4,14 +4,14 @@ import jaclib.memory.heap.NativeHeap;
 
 public class Node_Sub1_Sub1 extends Node_Sub1 {
 
-    NativeHeap aNativeHeap10051;
+	public NativeHeap aNativeHeap10051;
 
-    Node_Sub1_Sub1(int i_1) {
-        aNativeHeap10051 = new NativeHeap(i_1);
-    }
+	public Node_Sub1_Sub1(int i_1) {
+		aNativeHeap10051 = new NativeHeap(i_1);
+	}
 
-    void method15450() {
-        aNativeHeap10051.method760();
-    }
+	public void method15450() {
+		aNativeHeap10051.method760();
+	}
 
 }
