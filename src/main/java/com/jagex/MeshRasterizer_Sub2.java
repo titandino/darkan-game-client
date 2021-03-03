@@ -6,6 +6,8 @@ import com.jagex.client.js5.defs.models.materials.MaterialProp20;
 import com.jagex.unknown.*;
 import com.jagex.utils.ChoppyItemFixClass;
 
+import java.util.Arrays;
+
 public class MeshRasterizer_Sub2 extends MeshRasterizer {
 
 	public static int anInt8644 = 4096;
@@ -73,7 +75,7 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 	public ParticleEmitterConfig[] particleConfigs;
 	public SurfaceSkin[] surfaceSkins;
 	public Class193[] aClass193Array8618;
-	public short[] aShortArray8623;
+	public short[] faceIndices;
 	public int anInt8575;
 	public boolean aBool8609;
 	public boolean aBool8589;
@@ -456,10 +458,10 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 		}
 
 		if (aBool8630 || aClass193Array8618 != null) {
-			aShortArray8623 = new short[faceCount];
+			this.faceIndices = new short[faceCount];
 
 			for (i_64 = 0; i_64 < faceCount; i_64++) {
-				aShortArray8623[i_64] = (short) faceIndices[i_64];
+				this.faceIndices[i_64] = (short) faceIndices[i_64];
 			}
 		}
 
@@ -509,6 +511,7 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 
 	}
 
+	//update faces?
 	public void method13797() {
 		aClass189Array8584 = new Class189[maxDepth];
 
@@ -544,14 +547,14 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 			i_11 = i_11 * 256 / i_14;
 			i_12 = i_12 * 256 / i_14;
 			i_13 = i_13 * 256 / i_14;
-			byte b_15;
+			byte faceType;
 			if (faceTypes == null) {
-				b_15 = 0;
+				faceType = 0;
 			} else {
-				b_15 = faceTypes[i_1];
+				faceType = faceTypes[i_1];
 			}
 
-			if (b_15 == 0) {
+			if (faceType == 0) {
 				Class189 class189_16 = aClass189Array8584[s_2];
 				class189_16.anInt2380 += i_11;
 				class189_16.anInt2381 += i_12;
@@ -567,7 +570,7 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 				class189_16.anInt2381 += i_12;
 				class189_16.anInt2379 += i_13;
 				++class189_16.anInt2382;
-			} else if (b_15 == 1) {
+			} else if (faceType == 1) {
 				if (aClass195Array8599 == null) {
 					aClass195Array8599 = new Class195[faceCount];
 				}
@@ -1205,7 +1208,7 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 		class528_sub2_1.particleConfigs = particleConfigs;
 		class528_sub2_1.surfaceSkins = surfaceSkins;
 		class528_sub2_1.aClass193Array8618 = aClass193Array8618;
-		class528_sub2_1.aShortArray8623 = aShortArray8623;
+		class528_sub2_1.faceIndices = faceIndices;
 		class528_sub2_1.anInt8575 = i_3;
 		return class528_sub2_1;
 	}
@@ -1636,18 +1639,27 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 		aBool8621 = false;
 	}
 
+	static boolean set = false;
+	static int count = 0;
+
 	@Override
-	public void method11268(int id, int type, int[] ints_2, int i_3, int i_4, int i_5, int i_6, boolean bool_7) {
-		if (id == 808) return;
-		int i_8 = ints_2.length;
+	public void finish() {
+		System.out.println(Arrays.toString(vertexX));
+		System.out.println(Arrays.toString(vertexY));
+		System.out.println(Arrays.toString(vertexZ));
+	}
+
+	@Override
+	public void method11268(int id, int type, int frame, int[] labels, int transformX, int transformY, int transformZ, int i_6, boolean bool_7) {
+		int labelsCount = labels.length;
 		int i_9;
-		int i_10;
+		int index;
 		int face;
-		int i_14;
+		int sine;
 		if (type == 0) {
-			i_3 <<= 4;
-			i_4 <<= 4;
-			i_5 <<= 4;
+			transformX <<= 4;
+			transformY <<= 4;
+			transformZ <<= 4;
 			if (!aBool8589) {
 				for (i_9 = 0; i_9 < vertexCount; i_9++) {
 					vertexX[i_9] <<= 4;
@@ -1663,37 +1675,38 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 			anInt8607 = 0;
 			anInt8613 = 0;
 
-			for (i_10 = 0; i_10 < i_8; i_10++) {
-				int i_11 = ints_2[i_10];
-				if (i_11 < bones.length) {
-					int[] ints_12 = bones[i_11];
+			for (index = 0; index < labelsCount; index++) {
+				int label = labels[index];
+				if (label < bones.length) {
+					int[] ints_12 = bones[label];
 
 					for (face = 0; face < ints_12.length; face++) {
-						i_14 = ints_12[face];
-						anInt8611 += vertexX[i_14];
-						anInt8607 += vertexY[i_14];
-						anInt8613 += vertexZ[i_14];
+						sine = ints_12[face];
+						anInt8611 += vertexX[sine];
+						anInt8607 += vertexY[sine];
+						anInt8613 += vertexZ[sine];
 						++i_9;
 					}
 				}
 			}
 
 			if (i_9 > 0) {
-				anInt8611 = anInt8611 / i_9 + i_3;
-				anInt8607 = anInt8607 / i_9 + i_4;
-				anInt8613 = anInt8613 / i_9 + i_5;
+				int before = anInt8611;
+				anInt8611 = anInt8611 / i_9 + transformX;
+				anInt8607 = anInt8607 / i_9 + transformY;
+				anInt8613 = anInt8613 / i_9 + transformZ;
 			} else {
-				anInt8611 = i_3;
-				anInt8607 = i_4;
-				anInt8613 = i_5;
+				anInt8611 = transformX;
+				anInt8607 = transformY;
+				anInt8613 = transformZ;
 			}
 		} else {
 			int[] ints_18;
 			int i_19;
 			if (type == 1) {
-				i_3 <<= 4; //upscale?
-				i_4 <<= 4;
-				i_5 <<= 4;
+				transformX <<= 4; //upscale?
+				transformY <<= 4;
+				transformZ <<= 4;
 				if (!aBool8589) {
 					for (i_9 = 0; i_9 < vertexCount; i_9++) {
 						vertexX[i_9] <<= 4;
@@ -1704,54 +1717,54 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 					aBool8589 = true;
 				}
 
-				for (i_9 = 0; i_9 < i_8; i_9++) {
-					i_10 = ints_2[i_9];
-					if (i_10 < bones.length) {
-						ints_18 = bones[i_10];
+				for (i_9 = 0; i_9 < labelsCount; i_9++) {
+					index = labels[i_9];
+					if (index < bones.length) {
+						ints_18 = bones[index];
 
 						for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 							face = ints_18[i_19];
-							vertexX[face] += i_3;
-							vertexY[face] += i_4;
-							vertexZ[face] += i_5;
+							vertexX[face] += transformX;
+							vertexY[face] += transformY;
+							vertexZ[face] += transformZ;
 						}
 					}
 				}
 			} else {
-				int i_15;
+				int cosine;
 				int i_16;
 				if (type == 2) {
-					for (i_9 = 0; i_9 < i_8; i_9++) {
-						i_10 = ints_2[i_9];
-						if (i_10 < bones.length) {
-							ints_18 = bones[i_10]; //also known as faces?
+					for (i_9 = 0; i_9 < labelsCount; i_9++) {
+						index = labels[i_9];
+						if (index < bones.length) {
+							ints_18 = bones[index];
 							if ((i_6 & 0x1) == 0) {
 								for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 									face = ints_18[i_19];
 									vertexX[face] -= anInt8611;
 									vertexY[face] -= anInt8607;
 									vertexZ[face] -= anInt8613;
-									if (i_5 != 0) {
-										i_14 = Trig.SINE[i_5];
-										i_15 = Trig.COSINE[i_5];
-										i_16 = i_14 * vertexY[face] + i_15 * vertexX[face] + 16383 >> 14;
-										vertexY[face] = i_15 * vertexY[face] - i_14 * vertexX[face] + 16383 >> 14;
+									if (transformZ != 0) {
+										sine = Trig.SINE[transformZ];
+										cosine = Trig.COSINE[transformZ];
+										i_16 = sine * vertexY[face] + cosine * vertexX[face] + 16383 >> 14;
+										vertexY[face] = cosine * vertexY[face] - sine * vertexX[face] + 16383 >> 14;
 										vertexX[face] = i_16;
 									}
 
-									if (i_3 != 0) {
-										i_14 = Trig.SINE[i_3];
-										i_15 = Trig.COSINE[i_3];
-										i_16 = i_15 * vertexY[face] - i_14 * vertexZ[face] + 16383 >> 14;
-										vertexZ[face] = i_14 * vertexY[face] + i_15 * vertexZ[face] + 16383 >> 14;
+									if (transformX != 0) {
+										sine = Trig.SINE[transformX];
+										cosine = Trig.COSINE[transformX];
+										i_16 = cosine * vertexY[face] - sine * vertexZ[face] + 16383 >> 14;
+										vertexZ[face] = sine * vertexY[face] + cosine * vertexZ[face] + 16383 >> 14;
 										vertexY[face] = i_16;
 									}
 
-									if (i_4 != 0) {
-										i_14 = Trig.SINE[i_4];
-										i_15 = Trig.COSINE[i_4];
-										i_16 = i_14 * vertexZ[face] + i_15 * vertexX[face] + 16383 >> 14;
-										vertexZ[face] = i_15 * vertexZ[face] - i_14 * vertexX[face] + 16383 >> 14;
+									if (transformY != 0) {
+										sine = Trig.SINE[transformY];
+										cosine = Trig.COSINE[transformY];
+										i_16 = sine * vertexZ[face] + cosine * vertexX[face] + 16383 >> 14;
+										vertexZ[face] = cosine * vertexZ[face] - sine * vertexX[face] + 16383 >> 14;
 										vertexX[face] = i_16;
 									}
 
@@ -1765,27 +1778,27 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 									vertexX[face] -= anInt8611;
 									vertexY[face] -= anInt8607;
 									vertexZ[face] -= anInt8613;
-									if (i_3 != 0) {
-										i_14 = Trig.SINE[i_3];
-										i_15 = Trig.COSINE[i_3];
-										i_16 = i_15 * vertexY[face] - i_14 * vertexZ[face] + 16383 >> 14;
-										vertexZ[face] = i_14 * vertexY[face] + i_15 * vertexZ[face] + 16383 >> 14;
+									if (transformX != 0) {
+										sine = Trig.SINE[transformX];
+										cosine = Trig.COSINE[transformX];
+										i_16 = cosine * vertexY[face] - sine * vertexZ[face] + 16383 >> 14;
+										vertexZ[face] = sine * vertexY[face] + cosine * vertexZ[face] + 16383 >> 14;
 										vertexY[face] = i_16;
 									}
 
-									if (i_5 != 0) {
-										i_14 = Trig.SINE[i_5];
-										i_15 = Trig.COSINE[i_5];
-										i_16 = i_14 * vertexY[face] + i_15 * vertexX[face] + 16383 >> 14;
-										vertexY[face] = i_15 * vertexY[face] - i_14 * vertexX[face] + 16383 >> 14;
+									if (transformZ != 0) {
+										sine = Trig.SINE[transformZ];
+										cosine = Trig.COSINE[transformZ];
+										i_16 = sine * vertexY[face] + cosine * vertexX[face] + 16383 >> 14;
+										vertexY[face] = cosine * vertexY[face] - sine * vertexX[face] + 16383 >> 14;
 										vertexX[face] = i_16;
 									}
 
-									if (i_4 != 0) {
-										i_14 = Trig.SINE[i_4];
-										i_15 = Trig.COSINE[i_4];
-										i_16 = i_14 * vertexZ[face] + i_15 * vertexX[face] + 16383 >> 14;
-										vertexZ[face] = i_15 * vertexZ[face] - i_14 * vertexX[face] + 16383 >> 14;
+									if (transformY != 0) {
+										sine = Trig.SINE[transformY];
+										cosine = Trig.COSINE[transformY];
+										i_16 = sine * vertexZ[face] + cosine * vertexX[face] + 16383 >> 14;
+										vertexZ[face] = cosine * vertexZ[face] - sine * vertexX[face] + 16383 >> 14;
 										vertexX[face] = i_16;
 									}
 
@@ -1797,19 +1810,19 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 						}
 					}
 				} else if (type == 3) {
-					for (i_9 = 0; i_9 < i_8; i_9++) {
-						i_10 = ints_2[i_9];
-						if (i_10 < bones.length) {
-							ints_18 = bones[i_10];
+					for (i_9 = 0; i_9 < labelsCount; i_9++) {
+						index = labels[i_9];
+						if (index < bones.length) {
+							ints_18 = bones[index];
 
 							for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 								face = ints_18[i_19];
 								vertexX[face] -= anInt8611;
 								vertexY[face] -= anInt8607;
 								vertexZ[face] -= anInt8613;
-								vertexX[face] = i_3 * vertexX[face] / 128;
-								vertexY[face] = i_4 * vertexY[face] / 128;
-								vertexZ[face] = i_5 * vertexZ[face] / 128;
+								vertexX[face] = transformX * vertexX[face] / 128;
+								vertexY[face] = transformY * vertexY[face] / 128;
+								vertexZ[face] = transformZ * vertexZ[face] / 128;
 								vertexX[face] += anInt8611;
 								vertexY[face] += anInt8607;
 								vertexZ[face] += anInt8613;
@@ -1821,21 +1834,21 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 					Class176 class176_22;
 					if (type == 5) {
 						if (anIntArrayArray8608 != null && faceAlphas != null) {
-							for (i_9 = 0; i_9 < i_8; i_9++) {
-								i_10 = ints_2[i_9];
-								if (i_10 < anIntArrayArray8608.length) {
-									ints_18 = anIntArrayArray8608[i_10];
+							for (i_9 = 0; i_9 < labelsCount; i_9++) {
+								index = labels[i_9];
+								if (index < anIntArrayArray8608.length) {
+									ints_18 = anIntArrayArray8608[index];
 
 									for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 										face = ints_18[i_19];
-										i_14 = (faceAlphas[face] & 0xff) + i_3 * 8;
-										if (i_14 < 0) {
-											i_14 = 0;
-										} else if (i_14 > 255) {
-											i_14 = 255;
+										sine = (faceAlphas[face] & 0xff) + transformX * 8;
+										if (sine < 0) {
+											sine = 0;
+										} else if (sine > 255) {
+											sine = 255;
 										}
 
-										faceAlphas[face] = (byte) i_14;
+										faceAlphas[face] = (byte) sine;
 									}
 								}
 							}
@@ -1850,33 +1863,33 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 						}
 					} else if (type == 7) {
 						if (anIntArrayArray8608 != null) {
-							for (i_9 = 0; i_9 < i_8; i_9++) {
-								i_10 = ints_2[i_9];
-								if (i_10 < anIntArrayArray8608.length) {
-									ints_18 = anIntArrayArray8608[i_10];
+							for (i_9 = 0; i_9 < labelsCount; i_9++) {
+								index = labels[i_9];
+								if (index < anIntArrayArray8608.length) {
+									ints_18 = anIntArrayArray8608[index];
 
 									for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 										face = ints_18[i_19];
-										i_14 = faceColours[face] & 0xffff;
-										i_15 = i_14 >> 10 & 0x3f;
-										i_16 = i_14 >> 7 & 0x7;
-										int i_17 = i_14 & 0x7f;
-										i_15 = i_3 + i_15 & 0x3f;
-										i_16 += i_4;
+										sine = faceColours[face] & 0xffff;
+										cosine = sine >> 10 & 0x3f;
+										i_16 = sine >> 7 & 0x7;
+										int i_17 = sine & 0x7f;
+										cosine = transformX + cosine & 0x3f;
+										i_16 += transformY;
 										if (i_16 < 0) {
 											i_16 = 0;
 										} else if (i_16 > 7) {
 											i_16 = 7;
 										}
 
-										i_17 += i_5;
+										i_17 += transformZ;
 										if (i_17 < 0) {
 											i_17 = 0;
 										} else if (i_17 > 127) {
 											i_17 = 127;
 										}
 
-										faceColours[face] = (short) (i_15 << 10 | i_16 << 7 | i_17);
+										faceColours[face] = (short) (cosine << 10 | i_16 << 7 | i_17);
 									}
 
 									aBool8609 = true;
@@ -1896,52 +1909,52 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 						Class176 class176_21;
 						if (type == 8) {
 							if (anIntArrayArray8620 != null) {
-								for (i_9 = 0; i_9 < i_8; i_9++) {
-									i_10 = ints_2[i_9];
-									if (i_10 < anIntArrayArray8620.length) {
-										ints_18 = anIntArrayArray8620[i_10];
+								for (i_9 = 0; i_9 < labelsCount; i_9++) {
+									index = labels[i_9];
+									if (index < anIntArrayArray8620.length) {
+										ints_18 = anIntArrayArray8620[index];
 
 										for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 											class176_21 = aClass176Array8582[ints_18[i_19]];
-											class176_21.anInt2192 += i_3;
-											class176_21.anInt2189 += i_4;
+											class176_21.anInt2192 += transformX;
+											class176_21.anInt2189 += transformY;
 										}
 									}
 								}
 							}
 						} else if (type == 10) {
 							if (anIntArrayArray8620 != null) {
-								for (i_9 = 0; i_9 < i_8; i_9++) {
-									i_10 = ints_2[i_9];
-									if (i_10 < anIntArrayArray8620.length) {
-										ints_18 = anIntArrayArray8620[i_10];
+								for (i_9 = 0; i_9 < labelsCount; i_9++) {
+									index = labels[i_9];
+									if (index < anIntArrayArray8620.length) {
+										ints_18 = anIntArrayArray8620[index];
 
 										for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 											class176_21 = aClass176Array8582[ints_18[i_19]];
-											class176_21.aFloat2190 = class176_21.aFloat2190 * i_3 / 128.0F;
-											class176_21.aFloat2191 = class176_21.aFloat2191 * i_4 / 128.0F;
+											class176_21.aFloat2190 = class176_21.aFloat2190 * transformX / 128.0F;
+											class176_21.aFloat2191 = class176_21.aFloat2191 * transformY / 128.0F;
 										}
 									}
 								}
 							}
 						} else if (type == 9 && anIntArrayArray8620 != null) {
-							for (i_9 = 0; i_9 < i_8; i_9++) {
-								i_10 = ints_2[i_9];
-								if (i_10 < anIntArrayArray8620.length) {
-									ints_18 = anIntArrayArray8620[i_10];
+							for (i_9 = 0; i_9 < labelsCount; i_9++) {
+								index = labels[i_9];
+								if (index < anIntArrayArray8620.length) {
+									ints_18 = anIntArrayArray8620[index];
 
 									for (i_19 = 0; i_19 < ints_18.length; i_19++) {
 										class176_21 = aClass176Array8582[ints_18[i_19]];
-										class176_21.anInt2194 = i_3 + class176_21.anInt2194 & 0x3fff;
+										class176_21.anInt2194 = transformX + class176_21.anInt2194 & 0x3fff;
 									}
 								}
 							}
 						}
 					}
 				}
+
 			}
 		}
-
 	}
 
 	@Override
@@ -3010,9 +3023,9 @@ public class MeshRasterizer_Sub2 extends MeshRasterizer {
 			for (i_6 = 0; i_6 < faceCount; i_6++) {
 				method13868(bool_1, bool_2, bool_3, i_6, bool_4, bool_5);
 			}
-		} else if ((anInt8575 & 0x100) == 0 && aShortArray8623 != null) {
+		} else if ((anInt8575 & 0x100) == 0 && faceIndices != null) {
 			for (i_6 = 0; i_6 < faceCount; i_6++) {
-				short s_9 = aShortArray8623[i_6];
+				short s_9 = faceIndices[i_6];
 				method13868(bool_1, bool_2, bool_3, s_9, bool_4, bool_5);
 			}
 		} else {

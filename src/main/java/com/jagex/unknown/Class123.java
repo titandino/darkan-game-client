@@ -187,7 +187,7 @@ public class Class123 {
 			}
 		}
 		if (i_5 == -1) {
-			aAnimation_1545.resetAnimation();
+			aAnimation_1545.stopAnimation();
 		} else {
 			aAnimation_1545.setAnimationFull(i_5, 0, i_31, bool_6);
 			anInt1548 = client.CYCLES_20MS;
@@ -287,7 +287,7 @@ public class Class123 {
 
 	public void method2133() {
 		if (aAnimation_1545.hasDefs()) {
-			if (aAnimation_1545.method7627(client.CYCLES_20MS - anInt1548)) {
+			if (aAnimation_1545.setupLoop(client.CYCLES_20MS - anInt1548)) {
 				if (Class393.preferences.sceneryShadows.method12624() == 2) {
 					aBool1552 = false;
 				}

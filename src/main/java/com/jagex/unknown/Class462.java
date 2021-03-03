@@ -6,64 +6,64 @@ import com.jagex.client.js5.loaders.AnimationIndexLoader;
 
 public class Class462 {
 
-	public int frame1Index;
+	public int frame1Id;
 
-	public AnimationFrameSet frame1;
+	public AnimationFrameSet frameSet1;
 
 	public int flag;
 
-	public int frame2Index;
+	public int frame2Id;
 
-	public AnimationFrameSet frame2;
+	public AnimationFrameSet frameSet2;
 
-	public boolean aBool5544;
+	public boolean framesReady;
 
 	public boolean setupAnimationFrame(AnimationIndexLoader animationLoader, AnimationDefinitions animationDefinitions, int frame1Index, int frame2Index, int[] frameIndices) {
-		if (aBool5544) return true;
+		if (framesReady) return true;
 		if (frame1Index >= frameIndices.length)
 			return false;
-		this.frame1Index = frameIndices[frame1Index];
-		frame1 = animationLoader.getAnimationFrame(this.frame1Index >> 16);
-		this.frame1Index &= 0xffff;
-		if (frame1 == null)
+		this.frame1Id = frameIndices[frame1Index];
+		frameSet1 = animationLoader.getFrameSet(this.frame1Id >> 16);
+		this.frame1Id &= 0xffff;
+		if (frameSet1 == null)
 			return false;
 		if (animationDefinitions.tweened && frame2Index != -1 && frame2Index < frameIndices.length) {
-			this.frame2Index = frameIndices[frame2Index];
-			frame2 = animationLoader.getAnimationFrame(this.frame2Index >> 16);
-			this.frame2Index &= 0xffff;
+			this.frame2Id = frameIndices[frame2Index];
+			frameSet2 = animationLoader.getFrameSet(this.frame2Id >> 16);
+			this.frame2Id &= 0xffff;
 		}
 		if (animationDefinitions.aBool5923) {
 			flag |= 0x200;
 		}
-		if (frame1.modifiesColour(this.frame1Index)) {
+		if (frameSet1.modifiesColour(this.frame1Id)) {
 			flag |= 0x80;
 		}
-		if (frame1.modifiesAlpha(this.frame1Index)) {
+		if (frameSet1.modifiesAlpha(this.frame1Id)) {
 			flag |= 0x100;
 		}
-		if (frame1.method15081(this.frame1Index)) {
+		if (frameSet1.method15081(this.frame1Id)) {
 			flag |= 0x400;
 		}
-		if (frame2 != null) {
-			if (frame2.modifiesColour(this.frame2Index)) {
+		if (frameSet2 != null) {
+			if (frameSet2.modifiesColour(this.frame2Id)) {
 				flag |= 0x80;
 			}
-			if (frame2.modifiesAlpha(this.frame2Index)) {
+			if (frameSet2.modifiesAlpha(this.frame2Id)) {
 				flag |= 0x100;
 			}
-			if (frame2.method15081(this.frame2Index)) {
+			if (frameSet2.method15081(this.frame2Id)) {
 				flag |= 0x400;
 			}
 		}
 		flag |= 0x20;
-		aBool5544 = true;
+		framesReady = true;
 		return true;
 	}
 
 	public void resetFrames() {
-		aBool5544 = false;
+		framesReady = false;
 		flag = 0;
-		frame2 = null;
-		frame1 = null;
+		frameSet2 = null;
+		frameSet1 = null;
 	}
 }

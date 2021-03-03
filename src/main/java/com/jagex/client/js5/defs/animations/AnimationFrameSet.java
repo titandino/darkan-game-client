@@ -37,7 +37,7 @@ public class AnimationFrameSet extends CacheableNode {
 
 	public boolean method15081(int i_1) {
 		return frames[i_1].aBool988;
-	} //prob modifies something else
+	}
 
 	public boolean decodeFrameData() {
 		if (frames != null) {
@@ -103,7 +103,7 @@ public class AnimationFrameSet extends CacheableNode {
 						frameBaseList.insertBack(frameBase);
 					}
 
-					frames[fileIds[i]] = new AnimationFrame(frameData, frameBase);
+					frames[fileIds[i]] = new AnimationFrame(fileIds[i], frameData, frameBase);
 				}
 
 				frameData = null;

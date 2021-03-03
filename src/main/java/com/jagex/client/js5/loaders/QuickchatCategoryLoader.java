@@ -60,7 +60,7 @@ public class QuickchatCategoryLoader {
 									animable.aAnimation_Sub2_Sub1Array10354[i_9] = null;
 									class456_sub2_sub1_12 = null;
 								} else if (i_11 == 1) {
-									class456_sub2_sub1_12.method7582();
+									class456_sub2_sub1_12.resetAnimation();
 									class456_sub2_sub1_12.anInt10065 = i_8;
 								} else if (i_11 == 2) {
 									class456_sub2_sub1_12.method7584();

@@ -37,7 +37,7 @@ public class ClipFlagMap {
 			for (int i_4 = 0; i_4 < arr_3.length; i_4++) {
 				IComponentDefinitions icomponentdefinitions_5 = arr_3[i_4];
 				if (icomponentdefinitions_5 != null && icomponentdefinitions_5.anim != null) {
-					icomponentdefinitions_5.anim.method7582();
+					icomponentdefinitions_5.anim.resetAnimation();
 				}
 			}
 		}

@@ -45,14 +45,15 @@ public class Class150 {
 		Class148.aNode_Sub15_Sub2_1735.method15095(i_0, i_1);
 	}
 
+	//update animations, sets standing animation each time the old one stops
 	public static void method2581(PathingEntity animable_0) {
-		MovingAnimation class456_sub3_2 = animable_0.aAnimation_Sub3_10337;
-		if (class456_sub3_2.hasDefs() && class456_sub3_2.method7627(1) && class456_sub3_2.method7580()) {
-			if (class456_sub3_2.aBool7891) {
-				class456_sub3_2.setAnimation(animable_0.getRenderAnimDefs().getStandAnimation());
-				class456_sub3_2.aBool7891 = class456_sub3_2.hasDefs();
+		MovingAnimation animation = animable_0.aAnimation_Sub3_10337;
+		if (animation.hasDefs() && animation.setupLoop(1) && animation.method7580()) {
+			if (animation.aBool7891) {
+				animation.setAnimation(animable_0.getRenderAnimDefs().getStandAnimation());
+				animation.aBool7891 = animation.hasDefs();
 			}
-			class456_sub3_2.method7582();
+			animation.resetAnimation();
 		}
 		for (int i_3 = 0; i_3 < animable_0.spotAnims.length; i_3++) {
 			if (animable_0.spotAnims[i_3].spotAnimId != -1) {
@@ -72,7 +73,7 @@ public class Class150 {
 						}
 					}
 				}
-				if (animation_4.method7627(1) && animation_4.method7580()) {
+				if (animation_4.setupLoop(1) && animation_4.method7580()) {
 					animation_4.update(-1);
 					animable_0.spotAnims[i_3].spotAnimId = -1;
 				}
@@ -96,7 +97,7 @@ public class Class150 {
 					}
 					animation_7.setSpeed(0);
 				}
-				if (animation_7.method7627(1) && animation_7.method7580()) {
+				if (animation_7.setupLoop(1) && animation_7.method7580()) {
 					animable_0.currentAnimations = null;
 					animation_7.update(-1);
 				}
@@ -107,7 +108,7 @@ public class Class150 {
 			if (class456_sub2_sub1_10 != null) {
 				if (class456_sub2_sub1_10.anInt10065 > 0) {
 					--class456_sub2_sub1_10.anInt10065;
-				} else if (class456_sub2_sub1_10.method7627(1) && class456_sub2_sub1_10.method7580()) {
+				} else if (class456_sub2_sub1_10.setupLoop(1) && class456_sub2_sub1_10.method7580()) {
 					animable_0.aAnimation_Sub2_Sub1Array10354[i_8] = null;
 				}
 			}

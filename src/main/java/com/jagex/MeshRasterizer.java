@@ -6,6 +6,8 @@ import com.jagex.client.js5.defs.animations.AnimationFrameSet;
 import com.jagex.client.js5.defs.models.RSMesh;
 import com.jagex.unknown.Class83;
 
+import java.util.Arrays;
+
 public abstract class MeshRasterizer {
 
 	protected boolean aBool7023;
@@ -250,24 +252,21 @@ public abstract class MeshRasterizer {
 	public abstract void ia(int var1, int var2, int var3);
 
 	public void method11258(int id, AnimationFrameSet frameSet1, int frameIndex1, AnimationFrameSet frameSet2, int frameIndex2, int i_5, int duration, int i_8, boolean bool_9, int[] ints_10) {
-//        if(id == 808)
-//            System.out.println(frameIndex1);
 		if (frameIndex1 == -1) return;
-		method11260();
+		method11260(); //waits until next frame is allowed?
 		if (ea()) {
 			AnimationFrame frame1 = frameSet1.frames[frameIndex1];
-			AnimationFrameBase frameBase = frame1.frameBaseList;
+			AnimationFrameBase frameBase = frame1.frameBase;
 			AnimationFrame frame2 = null;
 			if (frameSet2 != null) {
 				frame2 = frameSet2.frames[frameIndex2];
-				if (frameBase != frame2.frameBaseList)
+				if (frameBase != frame2.frameBase)
 					frame2 = null;
 			}
-
 			method11266(id, frameBase, frame1, frame2, i_5, duration, 0, null, false, bool_9, i_8, ints_10);
 			ka();
 		}
-		method11261();
+		method11261(); //sets next frame allowable to be played?
 
 	}
 
@@ -297,20 +296,18 @@ public abstract class MeshRasterizer {
 
 	public abstract void method11261();
 
-	//CORRECT ONE FOR SOFTWARE MODE
 	public void method11262(int id, AnimationFrameSet frameSet, int frame1Index, AnimationFrameSet frameSet2, int frame2Index, int i_5, int i_6, int i_7, boolean bool_8) {
 		if (frame1Index == -1) return;
 		method11260();
 		if (ea()) {
 			AnimationFrame frame1 = frameSet.frames[frame1Index];
-			AnimationFrameBase frameBase = frame1.frameBaseList;
+			AnimationFrameBase frameBase = frame1.frameBase;
 			AnimationFrame frame2 = null;
 			if (frameSet2 != null) {
 				frame2 = frameSet2.frames[frame2Index];
-				if (frameBase != frame2.frameBaseList)
+				if (frameBase != frame2.frameBase)
 					frame2 = null;
 			}
-
 			method11266(id, frameBase, frame1, frame2, i_5, i_6, i_7, null, false, bool_8, 65535, null);
 			ka();
 		}
@@ -328,11 +325,11 @@ public abstract class MeshRasterizer {
 					method11261();
 				} else {
 					AnimationFrame animationskin_15 = animationskeleton_1.frames[i_2];
-					AnimationFrameBase animationskinnode_16 = animationskin_15.frameBaseList;
+					AnimationFrameBase animationskinnode_16 = animationskin_15.frameBase;
 					AnimationFrame animationskin_17 = null;
 					if (animationskeleton_3 != null) {
 						animationskin_17 = animationskeleton_3.frames[i_4];
-						if (animationskinnode_16 != animationskin_17.frameBaseList) {
+						if (animationskinnode_16 != animationskin_17.frameBase) {
 							animationskin_17 = null;
 						}
 					}
@@ -342,13 +339,13 @@ public abstract class MeshRasterizer {
 					AnimationFrame animationskin_19 = null;
 					if (animationskeleton_9 != null) {
 						animationskin_19 = animationskeleton_9.frames[i_10];
-						if (animationskinnode_16 != animationskin_19.frameBaseList) {
+						if (animationskinnode_16 != animationskin_19.frameBase) {
 							animationskin_19 = null;
 						}
 					}
 
-					method11268(id, 0, new int[0], 0, 0, 0, 0, bool_14); //reset animation i assume before sending new one
-					method11266(id, animationskin_18.frameBaseList, animationskin_18, animationskin_19, i_11, i_12, 0, bools_13, true, bool_14, 65535, null);
+					method11268(id, 0, i_2, new int[0], 0, 0, 0, 0, bool_14); //reset animation i assume before sending new one
+					method11266(id, animationskin_18.frameBase, animationskin_18, animationskin_19, i_11, i_12, 0, bools_13, true, bool_14, 65535, null);
 					ka();
 					method11261();
 				}
@@ -360,29 +357,29 @@ public abstract class MeshRasterizer {
 	}
 
 	public void method11266(int id, AnimationFrameBase animFrameBase, AnimationFrame animFrame1, AnimationFrame animFrame2, int i_4, int duration, int i_6, boolean[] bools_7, boolean bool_8, boolean bool_9, int modelIndex, int[] ints_11) {
-		int i_12;
-		if (animFrame2 != null && i_4 != 0) { //base frame
-			i_12 = 0;
-			int i_35 = 0;
+		int frame1Index;
+		if (animFrame2 != null && i_4 != 0) {
+			frame1Index = 0;
+			int frame2Index = 0;
 			for (int frameIndex = 0; frameIndex < animFrameBase.count; frameIndex++) {
 				boolean bool_15 = false;
-				if (i_12 < animFrame1.transformationCount && frameIndex == animFrame1.transformationIndices[i_12]) {
+				if (frame1Index < animFrame1.transformationCount && frameIndex == animFrame1.transformationIndices[frame1Index]) {
 					bool_15 = true;
 				}
 
 				boolean bool_16 = false;
-				if (i_35 < animFrame2.transformationCount && frameIndex == animFrame2.transformationIndices[i_35]) {
+				if (frame2Index < animFrame2.transformationCount && frameIndex == animFrame2.transformationIndices[frame2Index]) {
 					bool_16 = true;
 				}
 
 				if (bool_15 || bool_16) {
 					if (bools_7 != null && bools_7[frameIndex] != bool_8 && animFrameBase.transformationTypes[frameIndex] != 0) {
 						if (bool_15) {
-							++i_12;
+							++frame1Index;
 						}
 
 						if (bool_16) {
-							++i_35;
+							++frame2Index;
 						}
 					} else {
 						short s_17 = 0;
@@ -390,55 +387,55 @@ public abstract class MeshRasterizer {
 						if (type == 3 || type == 10)
 							s_17 = 128; //zoom/size? usually what 128 is
 
-						short s_19;
-						short s_20;
-						short s_21;
-						short skippedReference;
-						byte b_23;
+						short frame1X;
+						short frame1Y;
+						short frame1Z;
+						short frame1Skip;
+						byte frame1Flag;
 						if (bool_15) {
-							s_19 = animFrame1.transformationX[i_12];
-							s_20 = animFrame1.transformationY[i_12];
-							s_21 = animFrame1.transformationZ[i_12];
-							skippedReference = animFrame1.skippedReferences[i_12];
-							b_23 = animFrame1.transformationFlags[i_12];
-							++i_12;
+							frame1X = animFrame1.transformationX[frame1Index];
+							frame1Y = animFrame1.transformationY[frame1Index];
+							frame1Z = animFrame1.transformationZ[frame1Index];
+							frame1Skip = animFrame1.skippedReferences[frame1Index];
+							frame1Flag = animFrame1.transformationFlags[frame1Index];
+							++frame1Index;
 						} else {
-							s_19 = s_17;
-							s_20 = s_17;
-							s_21 = s_17;
-							skippedReference = -1;
-							b_23 = 0;
+							frame1X = s_17;
+							frame1Y = s_17;
+							frame1Z = s_17;
+							frame1Skip = -1;
+							frame1Flag = 0;
 						}
 
-						short s_24;
-						short s_25;
-						short s_26;
-						short s_27;
-						byte b_28;
+						short frame2X;
+						short frame2Y;
+						short frame2Z;
+						short frame2Skip;
+						byte frame2Flag;
 						if (bool_16) {
-							s_24 = animFrame2.transformationX[i_35];
-							s_25 = animFrame2.transformationY[i_35];
-							s_26 = animFrame2.transformationZ[i_35];
-							s_27 = animFrame2.skippedReferences[i_35];
-							b_28 = animFrame2.transformationFlags[i_35];
-							++i_35;
+							frame2X = animFrame2.transformationX[frame2Index];
+							frame2Y = animFrame2.transformationY[frame2Index];
+							frame2Z = animFrame2.transformationZ[frame2Index];
+							frame2Skip = animFrame2.skippedReferences[frame2Index];
+							frame2Flag = animFrame2.transformationFlags[frame2Index];
+							++frame2Index;
 						} else {
-							s_24 = s_17;
-							s_25 = s_17;
-							s_26 = s_17;
-							s_27 = -1;
-							b_28 = 0;
+							frame2X = s_17;
+							frame2Y = s_17;
+							frame2Z = s_17;
+							frame2Skip = -1;
+							frame2Flag = 0;
 						}
 
 						int i_29;
 						int i_30;
 						int i_31;
-						if ((b_23 & 0x2) == 0 && (b_28 & 0x1) == 0) {
+						if ((frame1Flag & 0x2) == 0 && (frame2Flag & 0x1) == 0) {
 							int i_32;
 							if (type == 2) {
-								i_32 = s_24 - s_19 & 0x3fff;
-								int i_33 = s_25 - s_20 & 0x3fff;
-								int i_34 = s_26 - s_21 & 0x3fff;
+								i_32 = frame2X - frame1X & 0x3fff;
+								int i_33 = frame2Y - frame1Y & 0x3fff;
+								int i_34 = frame2Z - frame1Z & 0x3fff;
 								if (i_32 >= 8192) {
 									i_32 -= 16384;
 								}
@@ -451,123 +448,125 @@ public abstract class MeshRasterizer {
 									i_34 -= 16384;
 								}
 
-								i_29 = s_19 + i_32 * i_4 / duration & 0x3fff;
-								i_30 = s_20 + i_33 * i_4 / duration & 0x3fff;
-								i_31 = s_21 + i_34 * i_4 / duration & 0x3fff;
+								i_29 = frame1X + i_32 * i_4 / duration & 0x3fff;
+								i_30 = frame1Y + i_33 * i_4 / duration & 0x3fff;
+								i_31 = frame1Z + i_34 * i_4 / duration & 0x3fff;
 							} else if (type == 9) {
-								i_32 = s_24 - s_19 & 0x3fff;
+								i_32 = frame2X - frame1X & 0x3fff;
 								if (i_32 >= 8192) {
 									i_32 -= 16384;
 								}
 
-								i_29 = s_19 + i_32 * i_4 / duration & 0x3fff;
+								i_29 = frame1X + i_32 * i_4 / duration & 0x3fff;
 								i_31 = 0;
 								i_30 = 0;
 							} else if (type == 7) {
-								i_32 = s_24 - s_19 & 0x3f;
+								i_32 = frame2X - frame1X & 0x3f;
 								if (i_32 >= 32) {
 									i_32 -= 64;
 								}
 
-								i_29 = s_19 + i_32 * i_4 / duration & 0x3f;
-								i_30 = s_20 + (s_25 - s_20) * i_4 / duration;
-								i_31 = s_21 + (s_26 - s_21) * i_4 / duration;
+								i_29 = frame1X + i_32 * i_4 / duration & 0x3f;
+								i_30 = frame1Y + (frame2Y - frame1Y) * i_4 / duration;
+								i_31 = frame1Z + (frame2Z - frame1Z) * i_4 / duration;
 							} else {
-								i_29 = s_19 + (s_24 - s_19) * i_4 / duration;
-								i_30 = s_20 + (s_25 - s_20) * i_4 / duration;
-								i_31 = s_21 + (s_26 - s_21) * i_4 / duration;
+								i_29 = frame1X + (frame2X - frame1X) * i_4 / duration;
+								i_30 = frame1Y + (frame2Y - frame1Y) * i_4 / duration;
+								i_31 = frame1Z + (frame2Z - frame1Z) * i_4 / duration;
 							}
 						} else {
-							i_29 = s_19;
-							i_30 = s_20;
-							i_31 = s_21;
+							i_29 = frame1X;
+							i_30 = frame1Y;
+							i_31 = frame1Z;
 						}
-
-						if (skippedReference != -1) {
-							method11267(id, 0, animFrameBase.labels[skippedReference], 0, 0, 0, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[skippedReference], ints_11);
-						} else if (s_27 != -1) {
-							method11267(id, 0, animFrameBase.labels[s_27], 0, 0, 0, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[s_27], ints_11);
+						if (frame1Skip != -1) {
+							beginTransformation(id, 0, animFrame1.id,  animFrameBase.labels[frame1Skip], 0, 0, 0, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[frame1Skip], ints_11);
+						} else if (frame2Skip != -1) {
+							beginTransformation(id, 0, animFrame1.id,  animFrameBase.labels[frame2Skip], 0, 0, 0, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[frame2Skip], ints_11);
 						}
-
-						method11267(id, type, animFrameBase.labels[frameIndex], i_29, i_30, i_31, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[frameIndex], ints_11);
+						beginTransformation(id, type, animFrame1.id,  animFrameBase.labels[frameIndex], i_29, i_30, i_31, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[frameIndex], ints_11);
 					}
 				}
 			}
 		} else {
-			for (i_12 = 0; i_12 < animFrame1.transformationCount; i_12++) {
-				short s_13 = animFrame1.transformationIndices[i_12];
+			for (frame1Index = 0; frame1Index < animFrame1.transformationCount; frame1Index++) {
+				short s_13 = animFrame1.transformationIndices[frame1Index];
 				if (bools_7 == null || bools_7[s_13] == bool_8 || animFrameBase.transformationTypes[s_13] == 0) {
-					short s_14 = animFrame1.skippedReferences[i_12];
+					short s_14 = animFrame1.skippedReferences[frame1Index];
 					if (s_14 != -1) {
-						method11267(id, 0, animFrameBase.labels[s_14], 0, 0, 0, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[s_14], ints_11);
+						beginTransformation(id, 0, animFrame1.id,  animFrameBase.labels[s_14], 0, 0, 0, i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[s_14], ints_11);
 					}
 
-					method11267(id, animFrameBase.transformationTypes[s_13], animFrameBase.labels[s_13], animFrame1.transformationX[i_12], animFrame1.transformationY[i_12], animFrame1.transformationZ[i_12], i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[s_13], ints_11);
+					beginTransformation(id, animFrameBase.transformationTypes[s_13], animFrame1.id,  animFrameBase.labels[s_13], animFrame1.transformationX[frame1Index], animFrame1.transformationY[frame1Index], animFrame1.transformationZ[frame1Index], i_6, bool_9, modelIndex & animFrameBase.anIntArray7561[s_13], ints_11);
 				}
 			}
 		}
-
 	}
 
-	public void method11267(int id, int type, int[] labels, int i_3, int i_4, int i_5, int i_6, boolean bool_7, int i_8, int[] ints_9) {
-		int i_31 = i_3;
-		int i_51 = i_5;
-		int i_10;
+	static boolean set = false;
+	static int count = 0;
+
+	public void beginTransformation(int id, int type, int frame, int[] labels, int transformX, int transformY, int transformZ, int i_6, boolean bool_7, int i_8, int[] ints_9) {
+		int transformedX = transformX;
+		int transformedZ = transformZ;
+		int buffer;
 		if (i_6 == 1) {
 			if (type != 0 && type != 1) {
 				if (type == 3) {
-					i_10 = i_31;
-					i_31 = i_51;
-					i_51 = i_10;
+					buffer = transformedX;
+					transformedX = transformedZ;
+					transformedZ = buffer;
 				} else if (type == 2) {
-					i_10 = i_31;
-					i_31 = -i_51 & 0x3fff;
-					i_51 = i_10 & 0x3fff;
+					buffer = transformedX;
+					transformedX = -transformedZ & 0x3fff;
+					transformedZ = buffer & 0x3fff;
 				}
 			} else {
-				i_10 = -i_31;
-				i_31 = i_51;
-				i_51 = i_10;
+				buffer = -transformedX;
+				transformedX = transformedZ;
+				transformedZ = buffer;
 			}
 		} else if (i_6 == 2) {
 			if (type != 0 && type != 1) {
 				if (type == 2) {
-					i_31 = -i_31 & 0x3fff;
-					i_51 = -i_51 & 0x3fff;
+					transformedX = -transformedX & 0x3fff;
+					transformedZ = -transformedZ & 0x3fff;
 				}
 			} else {
-				i_31 = -i_31;
-				i_51 = -i_51;
+				transformedX = -transformedX;
+				transformedZ = -transformedZ;
 			}
 		} else if (i_6 == 3) {
 			if (type != 0 && type != 1) {
 				if (type == 3) {
-					i_10 = i_31;
-					i_31 = i_51;
-					i_51 = i_10;
+					buffer = transformedX;
+					transformedX = transformedZ;
+					transformedZ = buffer;
 				} else if (type == 2) {
-					i_10 = i_31;
-					i_31 = i_51 & 0x3fff;
-					i_51 = -i_10 & 0x3fff;
+					buffer = transformedX;
+					transformedX = transformedZ & 0x3fff;
+					transformedZ = -buffer & 0x3fff;
 				}
 			} else {
-				i_10 = i_31;
-				i_31 = -i_51;
-				i_51 = i_10;
+				buffer = transformedX;
+				transformedX = -transformedZ;
+				transformedZ = buffer;
 			}
 		}
 
 		if (i_8 != 65535) { //model index?
-			e(type, labels, i_31, i_4, i_51, bool_7, i_8, ints_9);
+			e(type, labels, transformedX, transformY, transformedZ, bool_7, i_8, ints_9);
 		} else {
-			method11268(id, type, labels, i_31, i_4, i_51, i_6, bool_7);
+			method11268(id, type, frame, labels, transformedX, transformY, transformedZ, i_6, bool_7);
 		}
 
 	}
 
 	public abstract void bk(int var1);
 
-	public abstract void method11268(int id, int var1, int[] var2, int var3, int var4, int var5, int var6, boolean var7);
+	public abstract void method11268(int id, int type, int frame, int[] labels, int transformedX, int transformY, int transformedZ, int var6, boolean var7);
+
+	public abstract void finish();
 
 	public abstract void Q(int var1);
 
@@ -770,7 +769,7 @@ public abstract class MeshRasterizer {
 				method11261();
 			} else {
 				AnimationFrame animationskin_3 = animationskeleton_1.frames[i_2];
-				AnimationFrameBase animationskinnode_4 = animationskin_3.frameBaseList;
+				AnimationFrameBase animationskinnode_4 = animationskin_3.frameBase;
 
 				for (int i_5 = 0; i_5 < animationskin_3.transformationCount; i_5++) {
 					short s_6 = animationskin_3.transformationIndices[i_5];

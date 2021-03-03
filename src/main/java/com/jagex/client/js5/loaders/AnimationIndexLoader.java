@@ -138,15 +138,14 @@ public class AnimationIndexLoader {
 		}
 	}
 
-	public AnimationFrameSet getAnimationFrame(int i_1) {
-		LRUCache softcache_4 = cache;
+	public AnimationFrameSet getFrameSet(int i_1) {
 		synchronized (cache) {
-			AnimationFrameSet animationskeleton_3 = (AnimationFrameSet) cache.get(i_1);
-			if (animationskeleton_3 == null) {
-				animationskeleton_3 = new AnimationFrameSet(i_1);
-				cache.put(animationskeleton_3, i_1);
+			AnimationFrameSet frameSet = (AnimationFrameSet) cache.get(i_1);
+			if (frameSet == null) {
+				frameSet = new AnimationFrameSet(i_1);
+				cache.put(frameSet, i_1);
 			}
-			return !animationskeleton_3.decodeFrameData() ? null : animationskeleton_3;
+			return !frameSet.decodeFrameData() ? null : frameSet;
 		}
 	}
 

@@ -16,6 +16,8 @@ import com.jagex.client.render.AbstractRenderer;
 import com.jagex.net.io.ByteBuf;
 import com.jagex.unknown.*;
 
+import java.util.Arrays;
+
 public class PlayerModel {
 	/**
 	 *

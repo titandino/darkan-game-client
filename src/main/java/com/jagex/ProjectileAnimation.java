@@ -403,8 +403,8 @@ public class ProjectileAnimation extends GraphNode_Sub1_Sub1 {
 		class305_3.quaternion.multiply(quaternion_4);
 		quaternion_4.cache();
 		method11191(class305_3);
-		if (animation.method7627(1) && animation.method7580()) {
-			animation.method7582();
+		if (animation.setupLoop(1) && animation.method7580()) {
+			animation.resetAnimation();
 		}
 
 	}

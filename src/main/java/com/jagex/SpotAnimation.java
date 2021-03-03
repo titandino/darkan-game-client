@@ -82,7 +82,7 @@ public class SpotAnimation extends GraphNode_Sub1_Sub1 {
 
 	public void method15926() {
 		if (animation != null && !animation.method7580()) {
-			animation.method7627(1);
+			animation.setupLoop(1);
 		}
 
 	}

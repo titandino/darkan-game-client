@@ -10,7 +10,7 @@ public class AnimationFrame {
 	public static short[] bufferZ = new short[500];
 	public static short[] skipped = new short[500];
 	public static byte[] flagsBuffer = new byte[500];
-	public AnimationFrameBase frameBaseList;
+	public AnimationFrameBase frameBase;
 	public int transformationCount;
 	public boolean modifiesAlpha;
 	public boolean modifiesColor;
@@ -22,8 +22,11 @@ public class AnimationFrame {
 	public short[] skippedReferences;
 	public byte[] transformationFlags;
 
-	public AnimationFrame(byte[] data, AnimationFrameBase frameList) {
-		frameBaseList = frameList;
+	public int id;
+
+	public AnimationFrame(int id, byte[] data, AnimationFrameBase frameBase) {
+		this.frameBase = frameBase;
+		this.id = id;
 
 		try {
 			ByteBuf attribBuffer = new ByteBuf(data);
@@ -38,7 +41,7 @@ public class AnimationFrame {
 
 			int index;
 			for (index = 0; index < count; index++) {
-				int type = frameBaseList.transformationTypes[index];
+				int type = this.frameBase.transformationTypes[index];
 				if (type == 0) {
 					last = index;
 				}

@@ -173,7 +173,7 @@ public class AnimationDefinitions {
 			int[] ints_2 = frames;
 			for (int i_3 = 0; i_3 < ints_2.length; i_3++) {
 				int i_4 = ints_2[i_3];
-				if (animationIndexLoader.getAnimationFrame(i_4 >>> 16) == null) {
+				if (animationIndexLoader.getFrameSet(i_4 >>> 16) == null) {
 					bool_1 = false;
 				}
 			}

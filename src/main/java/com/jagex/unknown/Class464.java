@@ -39,8 +39,8 @@ public class Class464 {
 						icomponentdefinitions_4.anim = new Animation_Sub1();
 						icomponentdefinitions_4.anim.update(icomponentdefinitions_4.animation);
 					}
-					if (icomponentdefinitions_4.anim.method7627(client.anInt7261) && icomponentdefinitions_4.anim.method7580()) {
-						icomponentdefinitions_4.anim.method7582();
+					if (icomponentdefinitions_4.anim.setupLoop(client.anInt7261) && icomponentdefinitions_4.anim.method7580()) {
+						icomponentdefinitions_4.anim.resetAnimation();
 					}
 				}
 			}

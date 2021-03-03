@@ -53,28 +53,28 @@ public class GraphNode_Sub1_Sub3_Sub1 extends SceneObjectNode implements WorldOb
 	}
 
 	public static void method16078(MeshRasterizer meshrasterizer_0, Animation animation_1, Animation animation_2) {
-		if (animation_1.method7562() && animation_2.method7562()) {
+		if (animation_1.setupAnimationFrames() && animation_2.setupAnimationFrames()) {
 			AnimationDefinitions anim1Defs = animation_1.defs;
 			AnimationDefinitions anim2Defs = animation_2.defs;
-			meshrasterizer_0.method11264(anim1Defs.id, animation_1.animation.frame1, animation_1.animation.frame1Index, animation_1.animation.frame2, animation_1.animation.frame2Index, animation_1.frame1Duration, anim1Defs.frameDurations[animation_1.frame1Index], animation_2.animation.frame1, animation_2.animation.frame1Index, animation_2.animation.frame2, animation_2.animation.frame2Index, animation_2.frame1Duration, anim2Defs.frameDurations[animation_2.frame1Index], anim1Defs.aBoolArray5915, anim1Defs.aBool5923 | anim2Defs.aBool5923);
+			meshrasterizer_0.method11264(anim1Defs.id, animation_1.frameManager.frameSet1, animation_1.frameManager.frame1Id, animation_1.frameManager.frameSet2, animation_1.frameManager.frame2Id, animation_1.frame1Duration, anim1Defs.frameDurations[animation_1.frame1Index], animation_2.frameManager.frameSet1, animation_2.frameManager.frame1Id, animation_2.frameManager.frameSet2, animation_2.frameManager.frame2Id, animation_2.frame1Duration, anim2Defs.frameDurations[animation_2.frame1Index], anim1Defs.aBoolArray5915, anim1Defs.aBool5923 | anim2Defs.aBool5923);
 		}
 	}
 
 	public static MouseRecord_Sub2 method16080(int i_0, int i_1, int i_2, long long_3, int i_5) {
 		MouseRecord_Sub2[] arr_7 = MouseRecord_Sub2.aMouseRecord_Sub2Array9633;
 		synchronized (MouseRecord_Sub2.aMouseRecord_Sub2Array9633) {
-			MouseRecord_Sub2 class282_sub53_sub2_8;
+			MouseRecord_Sub2 record;
 			if (Class279.anInt3370 == 0) {
-				class282_sub53_sub2_8 = new MouseRecord_Sub2();
+				record = new MouseRecord_Sub2();
 			} else {
-				class282_sub53_sub2_8 = MouseRecord_Sub2.aMouseRecord_Sub2Array9633[--Class279.anInt3370];
+				record = MouseRecord_Sub2.aMouseRecord_Sub2Array9633[--Class279.anInt3370];
 			}
-			class282_sub53_sub2_8.clickType = i_0;
-			class282_sub53_sub2_8.x = i_1;
-			class282_sub53_sub2_8.y = i_2;
-			class282_sub53_sub2_8.aLong9634 = long_3;
-			class282_sub53_sub2_8.anInt9635 = i_5;
-			return class282_sub53_sub2_8;
+			record.clickType = i_0;
+			record.x = i_1;
+			record.y = i_2;
+			record.aLong9634 = long_3;
+			record.anInt9635 = i_5;
+			return record;
 		}
 	}
 

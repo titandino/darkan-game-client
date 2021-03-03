@@ -437,8 +437,13 @@ public class h extends MeshRasterizer implements Interface40 {
 	public native boolean bh();
 
 	@Override
-	public void method11268(int id, int i_1, int[] ints_2, int i_3, int i_4, int i_5, int i_6, boolean bool_7) {
+	public void method11268(int id, int i_1, int frame, int[] ints_2, int i_3, int i_4, int i_5, int i_6, boolean bool_7) {
 		J(nativeid, i_1, ints_2, i_3, i_4, i_5, i_6, bool_7);
+	}
+
+	@Override
+	public void finish() {
+
 	}
 
 	@Override

@@ -3437,7 +3437,7 @@ public class CS2Interpreter {
 		ChatLine chatline_3 = ChatLine.getChatLine(i_2);
 		int i_4 = -1;
 		if (chatline_3 != null) {
-			i_4 = chatline_3.quickchatMessageId;
+			i_4 = chatline_3.quickChatMessageId;
 		}
 		executor.intStack[++executor.intStackPtr - 1] = i_4;
 	}

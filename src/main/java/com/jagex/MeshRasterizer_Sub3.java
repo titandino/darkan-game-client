@@ -2359,7 +2359,7 @@ public class MeshRasterizer_Sub3 extends MeshRasterizer {
 	}
 
 	@Override
-	public void method11268(int id, int i_1, int[] ints_2, int i_3, int i_4, int i_5, int i_6, boolean bool_7) {
+	public void method11268(int id, int i_1, int frame, int[] ints_2, int i_3, int i_4, int i_5, int i_6, boolean bool_7) {
 		int i_8 = ints_2.length;
 		int i_9;
 		int i_10;
@@ -2711,6 +2711,11 @@ public class MeshRasterizer_Sub3 extends MeshRasterizer {
 				}
 			}
 		}
+
+	}
+
+	@Override
+	public void finish() {
 
 	}
 
@@ -5972,8 +5977,6 @@ public class MeshRasterizer_Sub3 extends MeshRasterizer {
 		if (textureIds != null) {
 			for (int i = 0; i < textureIds.length; i++) {
 				if (textureIds[i] != -1 && !aGraphicalRenderer_Sub2_8917.textureCache.loadTexture(textureIds[i])) {
-					if (textureIds[i] == 247)
-						System.out.println("SUCCESSFUL");
 					return false;
 				}
 			}

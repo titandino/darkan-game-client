@@ -863,6 +863,10 @@ public class MeshRasterizer_Sub1 extends MeshRasterizer {
 		return method13524(class528_sub1_5, class528_sub1_6, i_2, bool_4);
 	}
 
+	public void finish() {
+
+	}
+
 	MeshRasterizer method13524(MeshRasterizer_Sub1 class528_sub1_1, MeshRasterizer_Sub1 class528_sub1_2, int i_3, boolean bool_4) {
 		class528_sub1_1.aByte8242 = 0;
 		class528_sub1_1.anInt8240 = i_3;
@@ -3129,10 +3133,8 @@ public class MeshRasterizer_Sub1 extends MeshRasterizer {
 
 	}
 
-	//This is it... modify mesh for animation (i think)
 	@Override
-	public void method11268(int id, int i_1, int[] ints_2, int i_3, int i_4, int i_5, int i_6, boolean bool_7) {
-		System.out.println("animation");
+	public void method11268(int id, int i_1, int frame, int[] ints_2, int i_3, int i_4, int i_5, int i_6, boolean bool_7) {
 		int i_8 = ints_2.length;
 		int i_9;
 		int i_10;
@@ -4876,8 +4878,6 @@ public class MeshRasterizer_Sub1 extends MeshRasterizer {
 		if (textureIds != null) {
 			for (int i = 0; i < textureIds.length; i++) {
 				if (textureIds[i] != -1 && !aGraphicalRenderer_Sub1_8239.textureCache.loadTexture(textureIds[i])) {
-					if (textureIds[i] == 247)
-						System.out.println("SUCCESSFUL");
 					return false;
 				}
 			}

@@ -23,10 +23,10 @@ public class ChatLine {
 	public String name;
 	public String nameSimple;
 	public String clan;
-	public int quickchatMessageId;
+	public int quickChatMessageId;
 	public String message;
 
-	ChatLine(int type, int effectFlags, String crownedName, String name, String nameSimple, String clan, int i_7, String message) {
+	ChatLine(int type, int effectFlags, String crownedName, String name, String nameSimple, String clan, int quickChatMessageId, String message) {
 		time = client.CYCLES_20MS;
 		this.type = type;
 		this.effectFlags = effectFlags;
@@ -34,7 +34,7 @@ public class ChatLine {
 		this.name = name;
 		this.nameSimple = nameSimple;
 		this.clan = clan;
-		quickchatMessageId = i_7;
+		this.quickChatMessageId = quickChatMessageId;
 		this.message = message;
 	}
 
@@ -98,7 +98,7 @@ public class ChatLine {
 		name = string_4;
 		nameSimple = string_5;
 		clan = string_6;
-		quickchatMessageId = i_7;
+		quickChatMessageId = i_7;
 		message = string_8;
 	}
 }

@@ -89,7 +89,7 @@ public class Class20 {
 				AnimationDefinitions animationdefinitions_7 = animable.currentAnimation.getDefs();
 				int speedType = animationdefinitions_7.replayMode;
 				if (speedType == 1) {
-					animation_9.method7583(speed);
+					animation_9.resetAnimation(speed);
 				}
 				if (speedType == 2) {
 					animation_9.method7584();
